@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from Client.models import ClientPhone, ClientEvents, Tag
+from Client.models import ClientPhone, ClientEvents, Tag, Time
 
 
 # Register your models here.
@@ -21,5 +21,6 @@ class ClientEventsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Tag)
+admin.site.register(Time)
 admin.site.register(ClientPhone, ClientPhoneAdmin)
 admin.site.register(ClientEvents, ClientEventsAdmin)

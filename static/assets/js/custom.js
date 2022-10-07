@@ -692,7 +692,7 @@ $(".add_new_trigger").click(function () {
 });
 
 //Next click on trigger
-$(".rw_btn").on("click",function (e){
+$("#trigger_next").on("click",function (e){
   e.stopPropagation();
   if (document.getElementById('Keywords').checked){ 
     $("#Trigger ").modal("hide");

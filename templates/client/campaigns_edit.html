@@ -26,9 +26,11 @@
 <header class="rw_header_wrapper">
     <div class="rw_header_inner">
         <div class="header_title camp_header_title">
-            <a href="campaigns.html" class="back_arrow"><img src="{% static 'assets/images/icons/camp_back_arrow.svg' %}"
-                                                             alt="back_arrow"></a>
-            <a href="javascript:;" class="campaign_time_header" data-custom-value="Campaign {{ date }} TO {{ time }}">Campaign {{ date }} TO {{ time }}
+            <a href="campaigns.html" class="back_arrow"><img
+                    src="{% static 'assets/images/icons/camp_back_arrow.svg' %}"
+                    alt="back_arrow"></a>
+            <a href="javascript:;" class="campaign_time_header"
+               data-custom-value="{{ campaign_obj.name }}">{{ campaign_obj.name }}
                 <img src="{% static 'assets/images/icons/edit_dark.svg' %}" class="camp_edit_icon" alt="edit">
             </a>
         </div>
@@ -51,16 +53,20 @@
             <a href="client_dashboard.html"><img src="{% static 'assets/images/logo.svg' %}" alt="logo"></a>
         </div>
         <ul>
-            <li><a href="client_dashboard.html"><img src="{% static 'assets/images/icons/dashboard.svg' %}" alt="dashboard"></a>
+            <li><a href="client_dashboard.html"><img src="{% static 'assets/images/icons/dashboard.svg' %}"
+                                                     alt="dashboard"></a>
             </li>
-            <li><a href="client_contact.html"><img src="{% static 'assets/images/icons/contact.svg' %}" alt="contact"></a></li>
+            <li><a href="client_contact.html"><img src="{% static 'assets/images/icons/contact.svg' %}"
+                                                   alt="contact"></a></li>
             <li><a href="client_list.html"><img src="{% static 'assets/images/icons/bar.svg' %}" alt="bar"></a></li>
             <li><a href="client_scheduled_broadcast.html"><img src="{% static 'assets/images/icons/broadcast.svg' %}"
                                                                alt="broadcast"></a></li>
-            <li><a href="campaigns.html" class="active"><img src="{% static 'assets/images/icons/campaigns.svg' %}" alt="campaigns"></a>
+            <li><a href="campaigns.html" class="active"><img src="{% static 'assets/images/icons/campaigns.svg' %}"
+                                                             alt="campaigns"></a>
             </li>
             <li><a href="coupon.html"><img src="{% static 'assets/images/icons/coupon.svg' %}" alt="coupon"></a></li>
-            <li><a href="campaign_settings.html"><img src="{% static 'assets/images/icons/settings.svg' %}" alt="settings"></a></li>
+            <li><a href="campaign_settings.html"><img src="{% static 'assets/images/icons/settings.svg' %}"
+                                                      alt="settings"></a></li>
         </ul>
     </div>
 </header>
@@ -91,8 +97,26 @@
                                         <h5>Trigger</h5>
                                     </div>
                                 </div>
-                                <div class="trigger_add_new_btn">
-                                    <a href="javascript:;" class="add_new_trigger" data-bs-toggle="modal" data-bs-target="#Trigger">+add Trigger</a>
+                                <div class="camp_keyword">
+                                    {% if trigger_obj.type == "keyword_based_trigger" %}
+                                        <h5>Keyword</h5>
+                                        <ul>
+                                            <li><a href="javascript:;">{{ trigger_obj.keyword }}</a></li>
+                                        </ul>
+                                    {% elif trigger_obj.type == "date_based_trigger" %}
+                                        <h5>Date Based</h5>
+                                        <ul>
+                                            <li>
+                                                <a href="javascript:;">{{ trigger_obj.select_date.name }}(-{{ trigger_obj.select_before_date }}days)</a>
+                                            </li>
+                                        </ul>
+
+                                    {% elif trigger_obj.type == "tag_based_trigger" %}
+                                        <h5>Tag Based</h5>
+                                        <ul>
+                                            <li><a href="javascript:;">{{ trigger_obj.select_tags }}</a></li>
+                                        </ul>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="campiagns_plus trigger_dropdown">
@@ -101,11 +125,14 @@
                                 </div>
                                 <ul class="trigger_dropdown">
                                     <li><a href="javascript:;" class="text_msg_click"><img
-                                            src="{% static 'assets/images/icons/message.svg' %}" alt="image">Text Message</a></li>
+                                            src="{% static 'assets/images/icons/message.svg' %}" alt="image">Text
+                                        Message</a></li>
                                     <li><a href="javascript:;" class="time_delay_click"><img
-                                            src="{% static 'assets/images/icons/time.svg' %}" alt="image">Time Delay</a></li>
+                                            src="{% static 'assets/images/icons/time.svg' %}" alt="image">Time Delay</a>
+                                    </li>
                                     <li><a href="javascript:;" class="wait_until_click"><img
-                                            src="{% static 'assets/images/icons/wait.svg' %}" alt="image">Wait Until</a></li>
+                                            src="{% static 'assets/images/icons/wait.svg' %}" alt="image">Wait Until</a>
+                                    </li>
                                     <li><a href="javascript:;" class="tag_click"><img
                                             src="{% static 'assets/images/icons/tag.svg' %}" alt="image">Tag</a></li>
                                 </ul>
@@ -138,6 +165,9 @@
             </div>
             <div class="tab-pane" id="campaigns_setting" role="tabpanel">
                 <div class="rw_inner_form_inner_area">
+                    {#===================================================#}
+                    {#SETTINGS SECTION#}
+                    {#===================================================#}
                     <div class="campaigns_setting_content">
                         <div class="rw_broadcast_wrapper">
                             <div class="rw_broadcast_inner">
@@ -158,7 +188,11 @@
                                                 <div class="camp_toggle_switch">
                                                     <div class="rw_toggle_switch">
                                                         <div class="rw_switch">
-                                                            <input type="checkbox" checked="">
+                                                            {% if campaign_obj.sending_window == True %}
+                                                                <input type="checkbox" checked>
+                                                            {% else %}
+                                                                <input type="checkbox">
+                                                            {% endif %}
                                                         </div>
                                                     </div>
                                                     <h5>Sending Window</h5>
@@ -171,31 +205,63 @@
                                                     </div>
                                                     <ul>
                                                         <li>
-                                                            <input type="checkbox" id="monday" checked>
-                                                            <label for="monday">mon</label>
+                                                            {% if "Mon" in campaign_obj.sent_days %}
+                                                                <input value="Mon" type="checkbox" id="monday" checked>
+                                                            {% else %}
+                                                                <input value="Mon" type="checkbox" id="monday">
+                                                            {% endif %}
+                                                            <label for="monday">Mon</label>
                                                         </li>
                                                         <li>
-                                                            <input type="checkbox" id="tuesday" checked>
+                                                            {% if "Tues" in campaign_obj.sent_days %}
+                                                                <input value="Tues" type="checkbox" id="tuesday"
+                                                                       checked>
+                                                            {% else %}
+                                                                <input value="Tues" type="checkbox" id="tuesday">
+                                                            {% endif %}
                                                             <label for="tuesday">Tue</label>
                                                         </li>
                                                         <li>
-                                                            <input type="checkbox" id="wednesday" checked>
+                                                            {% if "Wens" in campaign_obj.sent_days %}
+                                                                <input value="Wens" type="checkbox" id="wednesday"
+                                                                       checked>
+                                                            {% else %}
+                                                                <input value="Wens" type="checkbox" id="wednesday">
+                                                            {% endif %}
                                                             <label for="wednesday">Wed</label>
                                                         </li>
                                                         <li>
-                                                            <input type="checkbox" id="thursday" checked>
+                                                            {% if "Thurs" in campaign_obj.sent_days %}
+                                                                <input value="Thurs" type="checkbox" id="thursday"
+                                                                       checked>
+                                                            {% else %}
+                                                                <input value="Thurs" type="checkbox" id="thursday">
+                                                            {% endif %}
                                                             <label for="thursday">Thu</label>
                                                         </li>
                                                         <li>
-                                                            <input type="checkbox" id="friday">
+                                                            {% if "Fri" in campaign_obj.sent_days %}
+                                                                <input value="Fri" type="checkbox" id="friday" checked>
+                                                            {% else %}
+                                                                <input value="Fri" type="checkbox" id="friday">
+                                                            {% endif %}
                                                             <label for="friday">fri</label>
                                                         </li>
                                                         <li>
-                                                            <input type="checkbox" id="saturday">
+                                                            {% if "Sat" in campaign_obj.sent_days %}
+                                                                <input value="Sat" type="checkbox" id="saturday"
+                                                                       checked>
+                                                            {% else %}
+                                                                <input value="Sat" type="checkbox" id="saturday">
+                                                            {% endif %}
                                                             <label for="saturday">sat</label>
                                                         </li>
                                                         <li>
-                                                            <input type="checkbox" id="sunday">
+                                                            {% if "Sun" in campaign_obj.sent_days %}
+                                                                <input value="Sun" type="checkbox" id="sunday" checked>
+                                                            {% else %}
+                                                                <input value="Sun" type="checkbox" id="sunday">
+                                                            {% endif %}
                                                             <label for="sunday">sun</label>
                                                         </li>
                                                     </ul>
@@ -206,25 +272,15 @@
                                                             <label class="rw_form_label">Start time</label>
                                                             <div class="rw_bootstrap_drop_down">
                                                                 <div class="dropdown">
-                                                                    <button class="btn  dropdown-toggle" type="button"
+                                                                    <select class="dropdown-toggle"
                                                                             data-bs-toggle="dropdown"
                                                                             aria-expanded="false">
-                                                                        9 AM
-                                                                    </button>
-                                                                    <ul class="dropdown-menu">
-                                                                        <li><a class="dropdown-item" href="#">10AM</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item" href="#">11AM</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item" href="#">12AM</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item" href="#">12AM</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item" href="#">12AM</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item" href="#">12AM</a>
-                                                                        </li>
-                                                                    </ul>
+                                                                        {% for obj in time_obj %}
+                                                                            <option class="dropdown-item"
+                                                                                    value="{{ obj }}">{{ obj.name }}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -234,25 +290,14 @@
                                                             <label class="rw_form_label">End time</label>
                                                             <div class="rw_bootstrap_drop_down">
                                                                 <div class="dropdown">
-                                                                    <button class="btn  dropdown-toggle" type="button"
+                                                                    <select class="dropdown-toggle"
                                                                             data-bs-toggle="dropdown"
                                                                             aria-expanded="false">
-                                                                        9 AM
-                                                                    </button>
-                                                                    <ul class="dropdown-menu">
-                                                                        <li><a class="dropdown-item" href="#">10AM</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item" href="#">11AM</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item" href="#">12AM</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item" href="#">12AM</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item" href="#">12AM</a>
-                                                                        </li>
-                                                                        <li><a class="dropdown-item" href="#">12AM</a>
-                                                                        </li>
-                                                                    </ul>
+                                                                        {% for obj in time_obj %}
+                                                                            <option class="dropdown-item"
+                                                                                    value="{{ obj }}">{{ obj.name }}</option>
+                                                                        {% endfor %}
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -289,25 +334,14 @@
                                                             <label class="rw_form_label">mobile number</label>
                                                             <div class="rw_bootstrap_drop_down">
                                                                 <div class="dropdown">
-                                                                    <button class="btn  dropdown-toggle" type="button"
+                                                                    <select class="dropdown-toggle"
                                                                             data-bs-toggle="dropdown"
                                                                             aria-expanded="false">
-                                                                        +91 9999999999
-                                                                    </button>
-                                                                    <ul class="dropdown-menu">
-                                                                        <li><a class="dropdown-item" href="#">+91
-                                                                            9999999997</a></li>
-                                                                        <li><a class="dropdown-item" href="#">+91
-                                                                            9999999998</a></li>
-                                                                        <li><a class="dropdown-item" href="#">+91
-                                                                            9999999996</a></li>
-                                                                        <li><a class="dropdown-item" href="#">+91
-                                                                            9999999996</a></li>
-                                                                        <li><a class="dropdown-item" href="#">+91
-                                                                            9999999996</a></li>
-                                                                        <li><a class="dropdown-item" href="#">+91
-                                                                            9999999996</a></li>
-                                                                    </ul>
+                                                                        {% for obj in client_phone %}
+                                                                            <option class="dropdown-item"
+                                                                                    value="{{ obj.phone }}">{{ obj.phone }}</option>
+                                                                        {% endfor %}
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -336,7 +370,11 @@
                                                 <div class="camp_toggle_switch">
                                                     <div class="rw_toggle_switch">
                                                         <div class="rw_switch">
-                                                            <input type="checkbox" checked="">
+                                                            {% if campaign_obj.double_optin == True %}
+                                                                <input type="checkbox" checked>
+                                                            {% else %}
+                                                                <input type="checkbox">
+                                                            {% endif %}
                                                         </div>
                                                     </div>
                                                     <h5>Double Optin</h5>
@@ -347,17 +385,23 @@
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="rw_form_inputs mb-3">
                                                             <label class="rw_form_label">keywords</label>
-                                                            <div class="rw_select2">
-                                                                <span class="input_icon caret"></span>
-                                                                <select id="double_optin_keyword"
-                                                                        class="form-control double_optin_keyword"
-                                                                        multiple>
-                                                                    <option>birthday</option>
-                                                                    <option>Anniversary</option>
-                                                                    <option>Anniversary</option>
-                                                                    <option>HB</option>
-                                                                </select>
-                                                            </div>
+                                                            <input type="email" placeholder="Enter Keyword"
+                                                                   id="keyword_field" name="keyword"
+                                                                   maxlength="30"
+                                                                   style="
+                                            line-height: 24px;
+                                            color: rgba(0, 0, 0, 0.4);
+                                            text-transform: capitalize;
+                                            display: flex;
+                                            align-items: center;
+                                            width: 100%;
+                                            height: 56px;
+                                            background: #ffffff;
+                                            border: 1px solid #ebecf4;
+                                            font-size: 14px;
+                                            position: relative;
+                                            margin-bottom: 16px;
+                                            padding: 0 55px 0 24px;">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
@@ -392,7 +436,11 @@
                                                 <div class="camp_toggle_switch">
                                                     <div class="rw_toggle_switch">
                                                         <div class="rw_switch">
-                                                            <input type="checkbox" checked="">
+                                                            {% if campaign_obj.limit_multiple == True %}
+                                                                <input type="checkbox" checked>
+                                                            {% else %}
+                                                                <input type="checkbox">
+                                                            {% endif %}
                                                         </div>
                                                     </div>
                                                     <h5>Limit Multiple</h5>
@@ -432,7 +480,11 @@
                                                 <div class="camp_toggle_switch">
                                                     <div class="rw_toggle_switch">
                                                         <div class="rw_switch">
-                                                            <input type="checkbox" checked="">
+                                                            {% if campaign_obj.cancellation_trigger == True %}
+                                                                <input type="checkbox" checked>
+                                                            {% else %}
+                                                                <input type="checkbox">
+                                                            {% endif %}
                                                         </div>
                                                     </div>
                                                     <h5>Cancellation Trigger</h5>
@@ -444,33 +496,19 @@
                                                         <ul class="trigger_ul">
                                                             <li class="trigger_li">
                                                                 <div class="rw_checkbox">
-                                                                    <input type="checkbox" class="check_input"
-                                                                           name="checkbox" id="on_reply">
+                                                                    {% if campaign_obj.on_reply == True %}
+                                                                        <input type="checkbox" class="check_input"
+                                                                               name="checkbox" id="on_reply" checked>
+                                                                    {% else %}
+                                                                        <input type="checkbox" class="check_input"
+                                                                               name="checkbox" id="on_reply">
+                                                                    {% endif %}
                                                                     <label for="on_reply">On Reply</label>
                                                                 </div>
                                                                 <p>
                                                                     Mauris blandit aliquet elit, eget tincidunt nibh
                                                                     pulvinar a. Pellentesque in ipsum id
                                                                 </p>
-                                                            </li>
-                                                            <li class="trigger_li">
-                                                                <div class="rw_checkbox">
-                                                                    <input type="checkbox" class="check_input"
-                                                                           name="checkbox" id="tag_added">
-                                                                    <label for="tag_added">Tag Added</label>
-                                                                </div>
-                                                                <p>Mauris blandit aliquet elit, eget tincidunt nibh
-                                                                    pulvinar a. Pellentesque in ipsum id</p>
-                                                                <div class="rw_form_inputs mb-3">
-                                                                    <div class="rw_select2">
-                                                                        <span class="input_icon caret"></span>
-                                                                        <select id="tag_added"
-                                                                                class="form-control tag_added" multiple>
-                                                                            <option>AB</option>
-                                                                            <option>HB</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -481,8 +519,7 @@
                                 </div>
                             </div>
                             <div class="rw_save_btn">
-                                <a href="javascript:;" class="rw_btn" data-bs-toggle="modal"
-                                   data-bs-target="#send_broadcast_popoup">Save Changes</a>
+                                <a href="javascript:;" class="rw_btn" id="save_settings">Save Changes</a>
                             </div>
                         </div>
                     </div>
@@ -534,14 +571,14 @@
                                     <div class="dropdown">
                                         <select class="dropdown-toggle" name="phone" id="phone">
                                             {% for obj in client_phone %}
-                                            <option class="dropdown-item" value="{{ obj.phone }}">{{ obj.phone }}</option>
+                                                <option class="dropdown-item" value="{{ obj }}">{{ obj.phone }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="rw_form_inputs">
-                                <label class="rw_form_label" >Add Keywords</label>
+                                <label class="rw_form_label">Add Keywords</label>
                                 <div class="rw_select2">
                                     <input type="email" placeholder="Enter Keyword" id="keyword_field" name="keyword"
                                            maxlength="30"
@@ -618,7 +655,8 @@
                                             <div class="dropdown">
                                                 <select class="dropdown-toggle" name="date" id="date">
                                                     {% for obj in date_obj %}
-                                                    <option class="dropdown-item" value="{{ obj.name }}">{{ obj.name }}</option>
+                                                        <option class="dropdown-item"
+                                                                value="{{ obj.name }}">{{ obj.name }}</option>
                                                     {% endfor %}
                                                 </select>
                                             </div>
@@ -631,12 +669,13 @@
                                         <label for="date_manually">Select Before Day</label>
                                     </div>
                                     <div class="rw_form_inputs">
-                                      <label class="rw_form_label">Select Number</label>
+                                        <label class="rw_form_label">Select Number</label>
                                         <div class="rw_bootstrap_drop_down">
                                             <div class="dropdown">
                                                 <select class="dropdown-toggle" name="day_before" id="day_before">
                                                     {% for obj in "0123456789" %}
-                                                    <option class="dropdown-item" value="{{forloop.counter}}">{{forloop.counter}}</option>
+                                                        <option class="dropdown-item"
+                                                                value="{{ forloop.counter }}">{{ forloop.counter }}</option>
                                                     {% endfor %}
                                                 </select>
                                             </div>
@@ -650,7 +689,7 @@
                                     <li><a href="javascript:;">cancel</a></li>
                                     <li><a href="javascript:;"
                                            class="date_trigger_save"
-                                           data-action-url = "{% url 'campaign:create_campaign' %}"
+                                           data-action-url="{% url 'campaign:create_campaign' %}"
                                     >Save</a></li>
                                 </ul>
                             </div>
@@ -705,7 +744,7 @@
                                     <li><a href="javascript:;">cancel</a></li>
                                     <li><a href="javascript:;"
                                            class="tag_trigger_save"
-                                           data-action-url = "{% url 'campaign:create_campaign' %}"
+                                           data-action-url="{% url 'campaign:create_campaign' %}"
                                     >Save</a></li>
                                 </ul>
                             </div>
@@ -762,7 +801,7 @@
                                 <ul>
                                     <!-- <li><a href="javascript:;" class="delete">delete</a></li> -->
                                     <li><a href="javascript:;">cancel</a></li>
-                                    <li><a href="javascript:;" class="rw_btn" id="trigger_next">Next</a></li>
+                                    <li><a href="javascript:;" class="rw_btn">Next</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -812,9 +851,11 @@
                                                        class="quanti-invitati">
                                                 <ul class="input_spinner">
                                                     <li class="quanti-invitati-op" data-op="1"><img
-                                                            src="{% static 'assets/images/icons/sort_up.svg' %}" alt=""></li>
+                                                            src="{% static 'assets/images/icons/sort_up.svg' %}" alt="">
+                                                    </li>
                                                     <li class="quanti-invitati-op" data-op="-1"><img
-                                                            src="{% static 'assets/images/icons/sort_down.svg' %}" alt=""></li>
+                                                            src="{% static 'assets/images/icons/sort_down.svg' %}"
+                                                            alt=""></li>
                                                 </ul>
                                             </div>
                                             <span>:</span>
@@ -823,9 +864,11 @@
                                                        class="quanti-invitati2">
                                                 <ul class="input_spinner">
                                                     <li class="quanti-invitati-op2" data-op="1"><img
-                                                            src="{% static 'assets/images/icons/sort_up.svg' %}" alt=""></li>
+                                                            src="{% static 'assets/images/icons/sort_up.svg' %}" alt="">
+                                                    </li>
                                                     <li class="quanti-invitati-op2" data-op="-1"><img
-                                                            src="{% static 'assets/images/icons/sort_down.svg' %}" alt=""></li>
+                                                            src="{% static 'assets/images/icons/sort_down.svg' %}"
+                                                            alt=""></li>
                                                 </ul>
                                             </div>
                                             <span>:</span>
@@ -905,9 +948,11 @@
                                                    class="quanti-invitati3">
                                             <ul class="input_spinner">
                                                 <li class="quanti-invitati-op3" data-op="1"><img
-                                                        src="{% static 'assets/images/icons/sort_up.svg' %}" alt=""></li>
+                                                        src="{% static 'assets/images/icons/sort_up.svg' %}" alt="">
+                                                </li>
                                                 <li class="quanti-invitati-op3" data-op="-1"><img
-                                                        src="{% static 'assets/images/icons/sort_down.svg' %}" alt=""></li>
+                                                        src="{% static 'assets/images/icons/sort_down.svg' %}" alt="">
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -967,9 +1012,11 @@
                                     <div class="input_icons">
                                         <ul>
                                             <li><a href="javascript:;"><img
-                                                    src="{% static 'assets/images/icons/link_gradient.svg' %}" alt="image"></a></li>
-                                            <li><a href="javascript:;"><img src="{% static 'assets/images/icons/add_box.svg' %}"
-                                                                            alt="image"></a></li>
+                                                    src="{% static 'assets/images/icons/link_gradient.svg' %}"
+                                                    alt="image"></a></li>
+                                            <li><a href="javascript:;"><img
+                                                    src="{% static 'assets/images/icons/add_box.svg' %}"
+                                                    alt="image"></a></li>
                                             <li><a href="javascript:;"><img
                                                     src="{% static 'assets/images/icons/sentiment_satisfied.svg' %}"
                                                     alt="image"></a></li>
@@ -1049,85 +1096,14 @@
 <script src="{% static 'assets/js/select2.min.js' %}"></script>
 <script src="{% static 'assets/js/jquery-ui.js' %}"></script>
 <script src="{% static 'assets/js/custom.js' %}"></script>
-
-
-{#=================================================================#}
-{#                  AJAX CALL(s)                                    #}
-{#=================================================================#}
-{#     KEYWORD TRIGGER        #}
 <script>
-var csrf_token = '{{csrf_token}}'
-
-{#=======================#}
-{# keyword based trigger #}
-{#=======================#}
     $(document).ready(function () {
-        $('.keyword_save_btn').click(function () {
-            // AJAX request
-            var keyword_data = $('#keyword_field').val();
-            var value = $('.campaign_time_header').data("custom-value");
-            var phone = $("#phone").val();
-            $.ajax({
-                url: $(this).attr('data-action-url'),
-                type: 'post',
-                data: {'csrfmiddlewaretoken':csrf_token,
-                    "keyword": keyword_data,
-                    "phone": phone,
-                    "type":"keyword_based_trigger",
-                    "name":value},
-                success: function (response) {
-                    var redirect_link = "http://127.0.0.1:8000/campaign-edit/"
-                    var data =(response.pk)
-                    var pk = data.toString()
-                    window.location.href = redirect_link.concat(pk)
+        $('#save_settings').click(function () {
+            console.log("here")
+            var value = $('#monday').val();
+            console.log(value)
 
-                }
-            });
         });
-
-        $('.date_trigger_save').click(function () {
-            var day = $('#day_before').val();
-            var date = $('#date').val();
-             var value = $('.campaign_time_header').data("custom-value");
-            // AJAX request
-            $.ajax({
-                url: $(this).attr('data-action-url'),
-                type: 'post',
-                data: {'csrfmiddlewaretoken':csrf_token,
-                    "type": "date_based_trigger",
-                    "day":day,
-                    "date":date,
-                    "name":value},
-                success: function (response) {
-                    var redirect_link = "http://127.0.0.1:8000/campaign-edit/"
-                    var data =(response.pk)
-                    var pk = data.toString()
-                    window.location.href = redirect_link.concat(pk)
-                }
-            });
-        });
-
-        $('.tag_trigger_save').click(function () {
-            var tag = $('#tagg').val();
-             var value = $('.campaign_time_header').data("custom-value");
-
-            // AJAX request
-            $.ajax({
-                url: $(this).attr('data-action-url'),
-                type: 'post',
-                data: {'csrfmiddlewaretoken':csrf_token,
-                    "type": "tag_based_trigger",
-                    "tag":tag,
-                    "name":value},
-                success: function (response) {
-                    var redirect_link = "http://127.0.0.1:8000/campaign-edit/"
-                    var data =(response.pk)
-                    var pk = data.toString()
-                    window.location.href = redirect_link.concat(pk)
-                }
-            });
-        });
-
     });
 </script>
 </body>

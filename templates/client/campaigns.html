@@ -83,17 +83,22 @@
                         </tr>
                     </thead>
                     <tbody>
+                    {% for obj in campaign_data %}
                        <tr>
-                           <td>Referral Program</td>
-                           <td>3 Dec, 2021  03:00 PM</td>
-                           <td class="text-center">6</td>
-                           <td class="text-center">20</td>
-                           <td class="text-center">20</td>
+                           <td>{{ obj.name}}</td>
+                           <td>{{ obj.date_created}}</td>
+                           <td class="text-center">{{ obj.steps }}</td>
+                           <td class="text-center">{{ obj.in_progress }}</td>
+                           <td class="text-center">{{ obj.complete }}</td>
                            <td class="text-center">
                                <div class="rw_toggle_switch">
-                                  <div class="rw_switch">
-                                    <input type="checkbox"  checked>
-                                  </div>
+                                   <div class="rw_switch">
+                                       {% if obj.status == True %}
+                                           <input type="checkbox" checked>
+                                       {% else %}
+                                           <input type="checkbox">
+                                       {% endif %}
+                                   </div>
                                </div>
                            </td>
                            <td class="text-center">
@@ -101,42 +106,19 @@
                              <ul class="drop_ul">
                                  <li class="position-relative"><a href="javascript:;" class="action_btn"><img src="{% static 'assets/images/icons/action.svg' %}" alt="action"></a>
                                      <ul class="action_submenu">
-                                         <li><a href="javascript:;" class="remove_action" data-bs-toggle="modal" data-bs-target="#"><img src="{% static 'assets/images/icons/edit.svg' %}" alt="image">edit</a></li>
-                                         <li><a href="javascript:;" class="remove_action" data-bs-toggle="modal" data-bs-target="#"><img src="{% static 'assets/images/icons/delete.svg' %}" alt="image">delete</a></li>
-                                         <li><a href="javascript:;" class="remove_action" data-bs-toggle="modal" data-bs-target="#"><img src="{% static 'assets/images/icons/make_default.svg' %}" alt="image">Make Default</a></li>
+                                         <li><a href="{% url 'campaign:campaign_edit' obj.pk %}" class="remove_action"><img
+                                                 src="{% static 'assets/images/icons/edit.svg' %}" alt="image">edit</a>
+                                         </li>
+                                         <li><a href="javascript:;" data-action-url={% url 'campaign:campaign_delete' obj.pk %}  class="remove_action" id="delete_campaign"><img
+                                                 src="{% static 'assets/images/icons/delete.svg' %}" alt="image">delete</a>
+                                         </li>
                                      </ul>
                                  </li>
                              </ul>
                             </div>
                         </td>
                        </tr>
-                       <tr>
-                        <td>Referral Program</td>
-                        <td>3 Dec, 2021  03:00 PM</td>
-                        <td class="text-center">6</td>
-                        <td class="text-center">20</td>
-                        <td class="text-center">20</td>
-                        <td class="text-center">
-                            <div class="rw_toggle_switch">
-                               <div class="rw_switch">
-                                 <input type="checkbox"  checked>
-                               </div>
-                            </div>
-                        </td>
-                        <td class="text-center">
-                         <div class="action_dropdown">
-                          <ul class="drop_ul">
-                              <li class="position-relative"><a href="javascript:;" class="action_btn"><img src="{% static 'assets/images/icons/action.svg' %}" alt="action"></a>
-                                  <ul class="action_submenu">
-                                      <li><a href="javascript:;" class="remove_action" data-bs-toggle="modal" data-bs-target="#"><img src="{% static 'assets/images/icons/edit.svg' %}" alt="image">edit</a></li>
-                                      <li><a href="javascript:;" class="remove_action" data-bs-toggle="modal" data-bs-target="#"><img src="{% static 'assets/images/icons/delete.svg' %}" alt="image">delete</a></li>
-                                      <li><a href="javascript:;" class="remove_action" data-bs-toggle="modal" data-bs-target="#"><img src="{% static 'assets/images/icons/make_default.svg' %}" alt="image">Make Default</a></li>
-                                  </ul>
-                              </li>
-                          </ul>
-                         </div>
-                     </td>
-                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -293,5 +275,18 @@
     <script src="{% static 'assets/js/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'assets/js/dataTables.bootstrap5.min.js' %}"></script>
     <script src="{% static 'assets/js/custom.js' %}"></script>
+   <script>
+       $('.date_trigger_save').click(function () {
+           // AJAX request
+           $.ajax({
+               url: $(this).attr('data-action-url'),
+               type: 'post',
+               data: {'csrfmiddlewaretoken': csrf_token,},
+               success: function (response) {
+               }
+           });
+       });
+
+   </script>
 </body>
 </html>
