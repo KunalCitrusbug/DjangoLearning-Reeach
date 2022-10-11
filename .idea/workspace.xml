@@ -2,17 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2f0ea75-689b-41dc-934c-b8b0cb1cd883" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Reeach.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Reeach.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campaign/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaign/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaign/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaign/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaign/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaign/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/campaign/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaign/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/assets/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/js/custom.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/client/campaigns.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/client/campaigns.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/client/campaigns_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/client/campaigns_edit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/client/create_campaign.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/client/create_campaign.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,7 +82,10 @@
       <workItem from="1664856054520" duration="29673000" />
       <workItem from="1665033395598" duration="26351000" />
       <workItem from="1665116218809" duration="13013000" />
-      <workItem from="1665129397018" duration="8970000" />
+      <workItem from="1665129397018" duration="9074000" />
+      <workItem from="1665462424209" duration="5214000" />
+      <workItem from="1665467886369" duration="1929000" />
+      <workItem from="1665470023693" duration="19711000" />
     </task>
     <servers />
   </component>

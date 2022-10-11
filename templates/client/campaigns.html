@@ -109,7 +109,7 @@
                                          <li><a href="{% url 'campaign:campaign_edit' obj.pk %}" class="remove_action"><img
                                                  src="{% static 'assets/images/icons/edit.svg' %}" alt="image">edit</a>
                                          </li>
-                                         <li><a href="javascript:;" data-action-url={% url 'campaign:campaign_delete' obj.pk %}  class="remove_action" id="delete_campaign"><img
+                                         <li><a href="javascript:;" data-action-url={% url 'campaign:delete_campaign' obj.pk %}  class="remove_action" id="delete_campaign"><img
                                                  src="{% static 'assets/images/icons/delete.svg' %}" alt="image">delete</a>
                                          </li>
                                      </ul>
@@ -276,13 +276,15 @@
     <script src="{% static 'assets/js/dataTables.bootstrap5.min.js' %}"></script>
     <script src="{% static 'assets/js/custom.js' %}"></script>
    <script>
-       $('.date_trigger_save').click(function () {
+       $('#delete_campaign').click(function () {
+           var csrf_token = '{{csrf_token}}'
            // AJAX request
            $.ajax({
                url: $(this).attr('data-action-url'),
                type: 'post',
                data: {'csrfmiddlewaretoken': csrf_token,},
                success: function (response) {
+                   window.location.reload();
                }
            });
        });

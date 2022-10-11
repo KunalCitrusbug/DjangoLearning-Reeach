@@ -26,7 +26,7 @@
 <header class="rw_header_wrapper">
     <div class="rw_header_inner">
         <div class="header_title camp_header_title">
-            <a href="campaigns.html" class="back_arrow"><img
+            <a href="{% url 'campaign:campaign' %}" class="back_arrow"><img
                     src="{% static 'assets/images/icons/camp_back_arrow.svg' %}"
                     alt="back_arrow"></a>
             <a href="javascript:;" class="campaign_time_header"
@@ -189,7 +189,7 @@
                                                     <div class="rw_toggle_switch">
                                                         <div class="rw_switch">
                                                             {% if campaign_obj.sending_window == True %}
-                                                                <input type="checkbox" checked>
+                                                                <input type="checkbox" id="send_checkbox" checked>
                                                             {% else %}
                                                                 <input type="checkbox">
                                                             {% endif %}
@@ -272,12 +272,12 @@
                                                             <label class="rw_form_label">Start time</label>
                                                             <div class="rw_bootstrap_drop_down">
                                                                 <div class="dropdown">
-                                                                    <select class="dropdown-toggle"
-                                                                            data-bs-toggle="dropdown"
-                                                                            aria-expanded="false">
+                                                                    <select class="dropdown-toggle">
+                                                                    <option id="start_time" class="dropdown-item"
+                                                                                    value="{{ campaign_obj.start_time }}">{{ campaign_obj.start_time }}</option>
                                                                         {% for obj in time_obj %}
-                                                                            <option class="dropdown-item"
-                                                                                    value="{{ obj }}">{{ obj.name }}</option>
+                                                                            <option id="start_time" class="dropdown-item"
+                                                                                    value="{{ obj.name }}">{{ obj.name }}</option>
                                                                         {% endfor %}
                                                                     </select>
 
@@ -290,12 +290,12 @@
                                                             <label class="rw_form_label">End time</label>
                                                             <div class="rw_bootstrap_drop_down">
                                                                 <div class="dropdown">
-                                                                    <select class="dropdown-toggle"
-                                                                            data-bs-toggle="dropdown"
-                                                                            aria-expanded="false">
+                                                                    <select class="dropdown-toggle">
+                                                                    <option id="end_time" class="dropdown-item"
+                                                                                    value="{{ campaign_obj.end_time }}">{{ campaign_obj.end_time }}</option>
                                                                         {% for obj in time_obj %}
-                                                                            <option class="dropdown-item"
-                                                                                    value="{{ obj }}">{{ obj.name }}</option>
+                                                                            <option id="end_time" class="dropdown-item"
+                                                                                    value="{{ obj.name }}">{{ obj.name }}</option>
                                                                         {% endfor %}
                                                                     </select>
                                                                 </div>
@@ -338,7 +338,7 @@
                                                                             data-bs-toggle="dropdown"
                                                                             aria-expanded="false">
                                                                         {% for obj in client_phone %}
-                                                                            <option class="dropdown-item"
+                                                                            <option class="dropdown-item" id="send_number"
                                                                                     value="{{ obj.phone }}">{{ obj.phone }}</option>
                                                                         {% endfor %}
                                                                     </select>
@@ -371,9 +371,9 @@
                                                     <div class="rw_toggle_switch">
                                                         <div class="rw_switch">
                                                             {% if campaign_obj.double_optin == True %}
-                                                                <input type="checkbox" checked>
+                                                                <input id="double_optin_checkbox" type="checkbox" checked>
                                                             {% else %}
-                                                                <input type="checkbox">
+                                                                <input id="double_optin_checkbox" type="checkbox">
                                                             {% endif %}
                                                         </div>
                                                     </div>
@@ -385,8 +385,8 @@
                                                     <div class="col-lg-6 col-md-12">
                                                         <div class="rw_form_inputs mb-3">
                                                             <label class="rw_form_label">keywords</label>
-                                                            <input type="email" placeholder="Enter Keyword"
-                                                                   id="keyword_field" name="keyword"
+                                                            <input type="email" placeholder="{% if campaign_obj.double_optin_keyword %}{{ campaign_obj.double_optin_keyword  }}{% else %}Enter Keyword {% endif %}"
+                                                                   id="double_optin_keyword" name="keyword"
                                                                    maxlength="30"
                                                                    style="
                                             line-height: 24px;
@@ -408,7 +408,7 @@
                                                         <div class="rw_form_inputs">
                                                             <label class="rw_form_label">Double Optin Message</label>
                                                             <div class="rw_input">
-                                                                <textarea placeholder="Type Message"></textarea>
+                                                                <textarea id="Double_optin_message" placeholder="{% if campaign_obj.double_optin_message %}{{ campaign_obj.double_optin_message  }}{% else %}Type Message{% endif %}"></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -437,9 +437,9 @@
                                                     <div class="rw_toggle_switch">
                                                         <div class="rw_switch">
                                                             {% if campaign_obj.limit_multiple == True %}
-                                                                <input type="checkbox" checked>
+                                                                <input id="Limit_multiple_checkbox" type="checkbox" checked>
                                                             {% else %}
-                                                                <input type="checkbox">
+                                                                <input id="Limit_multiple_checkbox" type="checkbox">
                                                             {% endif %}
                                                         </div>
                                                     </div>
@@ -452,7 +452,7 @@
                                                         <div class="rw_form_inputs">
                                                             <label class="rw_form_label">Limit Multiple Message</label>
                                                             <div class="rw_input">
-                                                                <textarea placeholder="Type Message"></textarea>
+                                                                <textarea id="Limit_multiple_message" placeholder="{% if campaign_obj.limit_multiple_message %}{{ campaign_obj.limit_multiple_message  }}{% else %}Type Message{% endif %}"></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -481,9 +481,9 @@
                                                     <div class="rw_toggle_switch">
                                                         <div class="rw_switch">
                                                             {% if campaign_obj.cancellation_trigger == True %}
-                                                                <input type="checkbox" checked>
+                                                                <input id="Cancellation_trigger_checkbox" type="checkbox" checked>
                                                             {% else %}
-                                                                <input type="checkbox">
+                                                                <input id="Cancellation_trigger_checkbox" type="checkbox">
                                                             {% endif %}
                                                         </div>
                                                     </div>
@@ -519,7 +519,7 @@
                                 </div>
                             </div>
                             <div class="rw_save_btn">
-                                <a href="javascript:;" class="rw_btn" id="save_settings">Save Changes</a>
+                                <a href="javascript:;" class="rw_btn" id="save_settings" data-action-url="{% url 'campaign:update_settings' campaign_obj.pk %}" >Save Changes</a>
                             </div>
                         </div>
                     </div>
@@ -740,12 +740,9 @@
                             </div>
                             <div class="textmessage_footer">
                                 <ul>
-                                    <li><a href="javascript:;" class="delete">delete</a></li>
                                     <li><a href="javascript:;">cancel</a></li>
                                     <li><a href="javascript:;"
-                                           class="tag_trigger_save"
-                                           data-action-url="{% url 'campaign:create_campaign' %}"
-                                    >Save</a></li>
+                                           id="action_save" data-action-url="{% url 'campaign:add_actions' campaign_obj.pk %}">Save</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -846,30 +843,29 @@
                                     <div class="rw_form_inputs p-0">
                                         <label class="rw_form_label">Select Time</label>
                                         <div class="choose_time">
-                                            <div class="rw_input">
-                                                <input type="number" placeholder="Hours" value="2" min="1"
-                                                       class="quanti-invitati">
-                                                <ul class="input_spinner">
-                                                    <li class="quanti-invitati-op" data-op="1"><img
-                                                            src="{% static 'assets/images/icons/sort_up.svg' %}" alt="">
-                                                    </li>
-                                                    <li class="quanti-invitati-op" data-op="-1"><img
-                                                            src="{% static 'assets/images/icons/sort_down.svg' %}"
-                                                            alt=""></li>
-                                                </ul>
+                                            <div class="rw_bootstrap_drop_down">
+                                                <div class="dropdown">
+                                                    <select class="dropdown-toggle" id="action_wait_hours">
+                                                        <option class="dropdown-item"
+                                                                value="">Hours
+                                                        </option>
+                                                        {% for hour in "012345678911" %}
+                                                            <option class="dropdown-item-hour"
+                                                                    value="{{ forloop.counter }}">{{ forloop.counter }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
                                             </div>
                                             <span>:</span>
-                                            <div class="rw_input">
-                                                <input type="number" value="5" min="1" placeholder="Minute"
-                                                       class="quanti-invitati2">
-                                                <ul class="input_spinner">
-                                                    <li class="quanti-invitati-op2" data-op="1"><img
-                                                            src="{% static 'assets/images/icons/sort_up.svg' %}" alt="">
-                                                    </li>
-                                                    <li class="quanti-invitati-op2" data-op="-1"><img
-                                                            src="{% static 'assets/images/icons/sort_down.svg' %}"
-                                                            alt=""></li>
-                                                </ul>
+                                            <div class="rw_bootstrap_drop_down">
+                                                <div class="dropdown">
+                                                    <select class="dropdown-toggle" id="action_wait_minutes">
+                                                        {% for min in min_list %}
+                                                            <option class="dropdown-item-min"
+                                                                    value="{{min}}">{{min}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
                                             </div>
                                             <span>:</span>
                                             <div class="rw_input">
@@ -888,9 +884,8 @@
                             </ul>
                             <div class="textmessage_footer">
                                 <ul>
-                                    <li><a href="javascript:;" class="delete">delete</a></li>
                                     <li><a href="javascript:;">cancel</a></li>
-                                    <li><a href="javascript:;" class="rw_btn">save</a></li>
+                                    <li><a href="javascript:;" class="rw_btn" id="action_save" data-action-url="{% url 'campaign:add_actions' campaign_obj.pk %}" >save</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -924,28 +919,11 @@
                             </p>
                             <div class="time_delay_inputs choose_time">
                                 <div class="time_delay_input_box">
-                                    <div class="rw_form_inputs">
-                                        <div class="rw_bootstrap_drop_down">
-                                            <div class="dropdown">
-                                                <button class="btn  dropdown-toggle" type="button"
-                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                    Minutes
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">5</a></li>
-                                                    <li><a class="dropdown-item" href="#">10</a></li>
-                                                    <li><a class="dropdown-item" href="#">15</a></li>
-                                                    <li><a class="dropdown-item" href="#">20</a></li>
-                                                    <li><a class="dropdown-item" href="#">25</a></li>
-                                                    <li><a class="dropdown-item" href="#">30</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <div class="rw_form_inputs">
                                         <div class="rw_input">
-                                            <input type="text" placeholder="Number" value="10" min="1"
-                                                   class="quanti-invitati3">
+                                            <input type="text" placeholder="Number" min="1"
+                                                   class="quanti-invitati3" id="time_delay_no">
                                             <ul class="input_spinner">
                                                 <li class="quanti-invitati-op3" data-op="1"><img
                                                         src="{% static 'assets/images/icons/sort_up.svg' %}" alt="">
@@ -956,15 +934,14 @@
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="rw_form_inputs">
-                                    <div class="rw_input">
-                                        <div class="rw_dropdown">
-                                            <div class="select_dropdown">
-                                                <select>
-                                                    <option value="after">After</option>
-                                                    <option value="before">Before</option>
-                                                </select>
+                                    <div class="rw_form_inputs">
+                                        <div class="rw_bootstrap_drop_down">
+                                            <div class="dropdown">
+                                               <select class="dropdown-toggle" id="duration">
+                                                    <option class="dropdown-item" value="minutes">Minute(s)</option>
+                                                    <option class="dropdown-item" value="hours">Hour(s)</option>
+                                                    <option class="dropdown-item" value="days">Day(s)</option>
+                                               </select>
                                             </div>
                                         </div>
                                     </div>
@@ -972,9 +949,8 @@
                             </div>
                             <div class="textmessage_footer">
                                 <ul>
-                                    <li><a href="javascript:;" class="delete">delete</a></li>
                                     <li><a href="javascript:;">cancel</a></li>
-                                    <li><a href="javascript:;" class="rw_btn">save</a></li>
+                                    <li><a href="javascript:;" class="rw_btn" id="action_save" data-action-url="{% url 'campaign:add_actions' campaign_obj.pk %}" >save</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1004,7 +980,7 @@
                                 </div>
                             </div>
                             <div class="text_input_box">
-                                <textarea></textarea>
+                                <textarea class="action_text_message"></textarea>
                                 <div class="input_icon_wrapper">
                                     <div class="input_words">
                                         <p>50/200 characters</p>
@@ -1028,7 +1004,7 @@
                                 <ul>
                                     <li><a href="javascript:;" class="delete">delete</a></li>
                                     <li><a href="javascript:;">cancel</a></li>
-                                    <li><a href="javascript:;" class="rw_btn">save</a></li>
+                                    <li><a href="javascript:;" class="rw_btn" id="action_save" data-action-url="{% url 'campaign:add_actions' campaign_obj.pk %}">save</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1097,14 +1073,134 @@
 <script src="{% static 'assets/js/jquery-ui.js' %}"></script>
 <script src="{% static 'assets/js/custom.js' %}"></script>
 <script>
-    $(document).ready(function () {
         $('#save_settings').click(function () {
-            console.log("here")
-            var value = $('#monday').val();
-            console.log(value)
+            var csrf_token = '{{csrf_token}}'
+            {#---------TO CHECK SENT DAYS---------------#}
+            let monday = "False"
+            let tuesday = "False"
+            let wednesday = "False"
+            let thursday = "False"
+            let friday = "False"
+            let saturday = "False"
+            let sunday = "False"
+            let send_checkbox = "False"
+            let double_optin_checkbox = "False"
+            let Limit_multiple_checkbox = "False"
+            let Cancellation_trigger_checkbox = "False"
+            let on_reply = "False"
+
+
+            if (document.getElementById("on_reply").checked === true) {
+                on_reply = "True"
+            }
+            if (document.getElementById("Limit_multiple_checkbox").checked === true) {
+                Limit_multiple_checkbox = "True"
+            }
+            if (document.getElementById("Cancellation_trigger_checkbox").checked === true) {
+                Cancellation_trigger_checkbox = "True"
+            }
+            if (document.getElementById("double_optin_checkbox").checked === true) {
+                double_optin_checkbox = "True"
+            }
+            if (document.getElementById("monday").checked === true) {
+                monday = "True"
+            }
+            if (document.getElementById("tuesday").checked === true) {
+                tuesday = "True"
+            }
+            if (document.getElementById("wednesday").checked === true) {
+                wednesday = "True"
+            }
+            if (document.getElementById("thursday").checked === true) {
+                thursday = "True"
+            }
+            if (document.getElementById("friday").checked === true) {
+                friday = "True"
+            }
+            if (document.getElementById("saturday").checked === true) {
+                saturday = "True"
+            }
+            if (document.getElementById("sunday").checked === true) {
+                sunday = "True"
+            }
+            if (document.getElementById("send_checkbox").checked === true) {
+                send_checkbox = "True";
+            }
+            var start_time = $("#start_time").val();
+            var end_time = $("#end_time").val();
+            var send_number =$("#send_number").val();
+            var double_optin_keyword =$("#double_optin_keyword").val();
+            var Double_optin_message =$("#Double_optin_message").val();
+            var Limit_multiple_message =$("#Limit_multiple_message").val();
+
+
+
+            {#------AJAX CALL------------#}
+            $.ajax({
+                url: $(this).attr('data-action-url'),
+                type: 'post',
+                data: {
+                    'csrfmiddlewaretoken': csrf_token,
+                    "monday": monday,
+                    "tuesday": tuesday,
+                    "wednesday": wednesday,
+                    "thursday": thursday,
+                    "friday": friday,
+                    "saturday": saturday,
+                    "sunday": sunday,
+                    "send_checkbox": send_checkbox,
+                    "start_time" : start_time,
+                    "end_time" : end_time,
+                    "send_number" : send_number,
+                    "double_optin_checkbox" : double_optin_checkbox,
+                    "double_optin_keyword" : double_optin_keyword,
+                    "Double_optin_message" : Double_optin_message,
+                    "Limit_multiple_checkbox":Limit_multiple_checkbox,
+                    "Limit_multiple_message" :Limit_multiple_message,
+                    "Cancellation_trigger_checkbox" : Cancellation_trigger_checkbox,
+                    "on_reply":on_reply
+                },
+                success: function (response) {
+                    var redirect_link = "http://127.0.0.1:8000/campaign-edit/"
+                    var data =(response.pk)
+                    var pk = data.toString()
+                    window.location.href = redirect_link.concat(pk)
+
+                }
+            });
 
         });
-    });
+
+{#--------------TEXT MESSAGE ACTION------------------#}
+        $('#action_save').click(function () {
+            var csrf_token = '{{csrf_token}}'
+            var text_message = $('.action_text_message').val();
+            var time_delay_no = $('#time_delay_no').val();
+            var duration = $('#duration').val();
+            var wait_hour = $('#action_wait_hours').val();
+            var wait_minute = $('#action_wait_minutes').val();
+            var tagg = $('#tagg').val();
+
+            // AJAX request
+            $.ajax({
+                url: $(this).attr('data-action-url'),
+                type: 'post',
+                data: {
+                    'csrfmiddlewaretoken': csrf_token,
+                    "text_message":text_message,
+                    "time_delay_no":time_delay_no,
+                    "duration":duration,
+                    "wait_hour":wait_hour,
+                    "wait_minute":wait_minute,
+                    "tag":tagg,
+
+
+                },
+                success: function (response) {
+                    window.location.reload()
+                }
+            });
+        });
 </script>
 </body>
 </html>

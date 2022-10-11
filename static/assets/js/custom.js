@@ -708,3 +708,31 @@ $("#trigger_next").on("click",function (e){
   }
 });
 
+
+$(".cancel_btn").on("click",function (e){
+    e.stopPropagation();
+    $("#text_message ").modal("hide");
+});
+
+
+// text_msg_click   text_message
+
+$(".text_msg_click").on("click",function (e){
+    e.stopPropagation();
+    $("#text_message ").modal("show");
+});
+
+$(".time_delay_click").on("click",function (e){
+    e.stopPropagation();
+    $("#time_delay ").modal("show");
+});
+
+$(".wait_until_click").on("click",function (e){
+    e.stopPropagation();
+    $("#data_base_trigger ").modal("show");
+});
+$(".tag_click").on("click",function (e){
+    e.stopPropagation();
+    $("#select_tag_trigger ").modal("show");
+});
+

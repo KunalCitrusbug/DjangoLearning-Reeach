@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from campaign.models import Campaign, Trigger
+from campaign.models import Campaign, Trigger, Action
 
 
 # Register your models here.
@@ -24,4 +24,5 @@ class TriggerAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Campaign, CampaignAdmin)
+admin.site.register(Action)
 admin.site.register(Trigger, TriggerAdmin)

@@ -567,8 +567,7 @@
                             </ul>
                             <div class="textmessage_footer">
                                 <ul>
-                                    <li><a href="javascript:;" class="delete">delete</a></li>
-                                    <li><a href="javascript:;">cancel</a></li>
+                                    <li><a class="cancel_btn" href="javascript:;">cancel</a></li>
                                     <li><a href="javascript:;"
                                            class="keyword_save_btn"
                                            data-action-url="{% url 'campaign:create_campaign' %}"
@@ -689,15 +688,7 @@
                             </div>
                             <div class="rw_form_inputs">
                                 <label class="rw_form_label">Select Tags</label>
-                                <div class="rw_bootstrap_drop_down">
-                                    <div class="dropdown">
-                                        <select class="dropdown-toggle" name="tagg" id="tagg">
-                                            {% for tag in tags %}
-                                                <option class="dropdown-item" value="{{ tag }}">{{ tag }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                </div>
+                            d
                             </div>
                             <div class="textmessage_footer">
                                 <ul>
@@ -912,18 +903,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="rw_form_inputs">
-                                    <div class="rw_input">
-                                        <div class="rw_dropdown">
-                                            <div class="select_dropdown">
-                                                <select>
-                                                    <option value="after">After</option>
-                                                    <option value="before">Before</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <div class="textmessage_footer">
                                 <ul>
@@ -959,7 +938,7 @@
                                 </div>
                             </div>
                             <div class="text_input_box">
-                                <textarea></textarea>
+                                <textarea class="text_message_action"></textarea>
                                 <div class="input_icon_wrapper">
                                     <div class="input_words">
                                         <p>50/200 characters</p>
@@ -979,9 +958,8 @@
                             </div>
                             <div class="textmessage_footer">
                                 <ul>
-                                    <li><a href="javascript:;" class="delete">delete</a></li>
-                                    <li><a href="javascript:;">cancel</a></li>
-                                    <li><a href="javascript:;" class="rw_btn">save</a></li>
+                                    <li><a class="cancel_btn" href="javascript:;">cancel</a></li>
+                                    <li><a href="javascript:;" class="rw_btn" id="action_text_save_btn" data-action-url="{% url 'campaign:create_campaign' %}">save</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1127,6 +1105,8 @@ var csrf_token = '{{csrf_token}}'
                 }
             });
         });
+
+
 
     });
 </script>
