@@ -183,15 +183,36 @@ class UpdateSettings(View):
 
 class AddActions(View):
     def post(self, *args, **kwargs):
-
-        campaign_obj = get_object_or_404(Campaign, id=kwargs.get('pk'))
-        Action.objects.create(
-            campaign=campaign_obj,
-            text_message=self.request.POST.get("text_message"),
-            number=self.request.POST.get("time_delay_no"),
-            duration=self.request.POST.get("duration"),
-            wait_until=(self.request.POST.get("wait_hour"), self.request.POST.get("wait_minute"), 00),
-            tag=Tag.objects.get(name=self.request.POST.get("tag")),
-        )
-
-        return JsonResponse({'status': 'success'})
+        if self.request.POST.get("type") == "text_message":
+            campaign_obj = get_object_or_404(Campaign, id=kwargs.get('pk'))
+            Action.objects.create(
+                campaign=campaign_obj,
+                action = """{type: {},action:{}}""".format(self.request.POST.get("type"),self.request.POST.get("text_message"))
+            )
+            return JsonResponse({'status': 'success'})
+        
+        if self.request.POST.get("type") == "time_delay":
+            campaign_obj = get_object_or_404(Campaign, id=kwargs.get('pk'))
+            Action.objects.create(
+                campaign=campaign_obj,
+                type=self.request.POST.get("type"),
+                action = "{type: {},action:{}}".format(self.request.POST.get("type"),self.request.POST.get("text_message"))
+            )
+            return JsonResponse({'status': 'success'})
+        
+        if self.request.POST.get("type") == "wait_until":
+            campaign_obj = get_object_or_404(Campaign, id=kwargs.get('pk'))
+            Action.objects.create(
+                campaign=campaign_obj,
+                text_message=self.request.POST.get("text_message"),
+            )
+            return JsonResponse({'status': 'success'})
+        
+        if self.request.POST.get("type") == "tag":
+            campaign_obj = get_object_or_404(Campaign, id=kwargs.get('pk'))
+            Action.objects.create(
+                campaign=campaign_obj,
+                text_message=self.request.POST.get("text_message"),
+            )
+            return JsonResponse({'status': 'success'})
+        

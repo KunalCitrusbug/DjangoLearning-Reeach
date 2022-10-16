@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b2f0ea75-689b-41dc-934c-b8b0cb1cd883" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaign/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaign/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaign/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaign/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaign/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaign/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaign/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaign/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/js/custom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/client/campaigns.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/client/campaigns.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/client/campaigns_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/client/campaigns_edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/client/create_campaign.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/client/create_campaign.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,15 +26,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Project.color": "281e28",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/python/django projects/DjangoLearning-Reeach",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Reeach" type="Python.DjangoServer" factoryName="Django server">
       <module name="Reeach" />
@@ -86,6 +78,7 @@
       <workItem from="1665462424209" duration="5214000" />
       <workItem from="1665467886369" duration="1929000" />
       <workItem from="1665470023693" duration="19711000" />
+      <workItem from="1665732875287" duration="235000" />
     </task>
     <servers />
   </component>

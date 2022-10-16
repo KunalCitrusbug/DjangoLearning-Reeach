@@ -742,7 +742,7 @@
                                 <ul>
                                     <li><a href="javascript:;">cancel</a></li>
                                     <li><a href="javascript:;"
-                                           id="action_save" data-action-url="{% url 'campaign:add_actions' campaign_obj.pk %}">Save</a></li>
+                                           id="action_save_tag" data-action-url="{% url 'campaign:add_actions' campaign_obj.pk %}">Save</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -885,7 +885,7 @@
                             <div class="textmessage_footer">
                                 <ul>
                                     <li><a href="javascript:;">cancel</a></li>
-                                    <li><a href="javascript:;" class="rw_btn" id="action_save" data-action-url="{% url 'campaign:add_actions' campaign_obj.pk %}" >save</a></li>
+                                    <li><a href="javascript:;" class="rw_btn" id="action_save_wait" data-action-url="{% url 'campaign:add_actions' campaign_obj.pk %}" >save</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -950,7 +950,7 @@
                             <div class="textmessage_footer">
                                 <ul>
                                     <li><a href="javascript:;">cancel</a></li>
-                                    <li><a href="javascript:;" class="rw_btn" id="action_save" data-action-url="{% url 'campaign:add_actions' campaign_obj.pk %}" >save</a></li>
+                                    <li><a href="javascript:;" class="rw_btn" id="action_save_time" data-action-url="{% url 'campaign:add_actions' campaign_obj.pk %}" >save</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1004,7 +1004,7 @@
                                 <ul>
                                     <li><a href="javascript:;" class="delete">delete</a></li>
                                     <li><a href="javascript:;">cancel</a></li>
-                                    <li><a href="javascript:;" class="rw_btn" id="action_save" data-action-url="{% url 'campaign:add_actions' campaign_obj.pk %}">save</a></li>
+                                    <li><a href="javascript:;" class="rw_btn" id="action_save_message" data-action-url="{% url 'campaign:add_actions' campaign_obj.pk %}">save</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1172,35 +1172,96 @@
         });
 
 {#--------------TEXT MESSAGE ACTION------------------#}
-        $('#action_save').click(function () {
+        $('#action_save_message').click(function () {
             var csrf_token = '{{csrf_token}}'
+            var type = "text_message";
             var text_message = $('.action_text_message').val();
-            var time_delay_no = $('#time_delay_no').val();
-            var duration = $('#duration').val();
-            var wait_hour = $('#action_wait_hours').val();
-            var wait_minute = $('#action_wait_minutes').val();
-            var tagg = $('#tagg').val();
-
-            // AJAX request
+        
+            // AJAX request 
             $.ajax({
                 url: $(this).attr('data-action-url'),
                 type: 'post',
                 data: {
                     'csrfmiddlewaretoken': csrf_token,
                     "text_message":text_message,
-                    "time_delay_no":time_delay_no,
-                    "duration":duration,
-                    "wait_hour":wait_hour,
-                    "wait_minute":wait_minute,
-                    "tag":tagg,
-
-
+                    "type" : type
                 },
                 success: function (response) {
                     window.location.reload()
                 }
             });
         });
+
+{#--------------TIME DELAY ACTION------------------#}
+$('#action_save_time').click(function () {
+    var csrf_token = '{{csrf_token}}'
+    var type = "time_delay";
+    var time_delay_no = $('#time_delay_no').val();
+    var duration = $('#duration').val();
+
+    // AJAX request 
+    $.ajax({
+        url: $(this).attr('data-action-url'),
+        type: 'post',
+        data: {
+            'csrfmiddlewaretoken': csrf_token,
+            "time_delay_no":time_delay_no,
+            "duration":duration,
+            'type':type,
+
+
+        },
+        success: function (response) {
+            window.location.reload()
+        }
+    });
+});
+
+{#--------------WAIT UNTIL ACTION------------------#}
+$('#action_save_wait').click(function () {
+    var csrf_token = '{{csrf_token}}'
+    var type = "wait_until";
+    var wait_hour = $('#action_wait_hours').val();
+    var wait_minute = $('#action_wait_minutes').val();
+
+    // AJAX request 
+    $.ajax({
+        url: $(this).attr('data-action-url'),
+        type: 'post',
+        data: {
+            'csrfmiddlewaretoken': csrf_token,
+            "wait_hour":wait_hour,
+            "wait_minute":wait_minute,
+            'type':type,
+
+
+        },
+        success: function (response) {
+            window.location.reload()
+        }
+    });
+});
+{#--------------TAG ACTION------------------#}
+$('#action_save_tag').click(function () {
+    var csrf_token = '{{csrf_token}}'
+    var type = "tag";
+    var tagg = $('#tagg').val();
+
+    // AJAX request 
+    $.ajax({
+        url: $(this).attr('data-action-url'),
+        type: 'post',
+        data: {
+            'csrfmiddlewaretoken': csrf_token,
+            "tagg":tagg,
+            'type':type,
+        },
+        success: function (response) {
+            window.location.reload()
+        }
+    });
+});
+
 </script>
 </body>
 </html>

@@ -70,17 +70,9 @@ class Trigger(models.Model):
     select_date = models.ForeignKey(ClientEvents, on_delete=models.CASCADE, null=True, blank=True)
     select_before_date = models.CharField(max_length=2, null=True, blank=True, choices=DAYS_CHOICES)
     select_tags = models.ForeignKey(Tag, on_delete=models.CASCADE, null=True, blank=True)
-
-
+    
+    
 class Action(models.Model):
-    DURATION_CHOICES = (
-        ("minutes", "minutes"),
-        ("hours", "hours"),
-        ("days", "days")
-    )
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
-    text_message = models.TextField(max_length=300, null=True, blank=True)
-    number = models.CharField(null=True, blank=True,max_length=50)
-    duration = models.CharField(choices=DURATION_CHOICES, null=True, blank=True, max_length=50)
-    wait_until = models.TimeField(null=True, blank=True)
-    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, null=True, blank=True)
+    action = models.TextField(blank=True,null=True)
+    order = models.IntegerField(blank=True,null=True)
