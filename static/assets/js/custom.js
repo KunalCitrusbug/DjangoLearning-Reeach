@@ -720,27 +720,33 @@ $(".cancel_btn").on("click",function (e){
 $(".text_msg_click").on("click",function (e){
     e.stopPropagation();
     $("#text_message ").modal("show");
-      var order = $(this).attr('order-id');
-      $("input[name='message_order']").val(order);
+      var order1 = $(this).attr('order-id');
+      console.log(order1);
+      $("input[name='message_order']").val(order1);
 });
 
 $(".time_delay_click").on("click",function (e){
     e.stopPropagation();
     $("#time_delay ").modal("show");
-    var order = $(this).attr('order-id');
-    $("input[name='time_order']").val(order);
+    var order2 = $(this).attr('order-id');
+        console.log(order2)
+
+    $("input[name='time_order']").val(order2);
 });
 
 $(".wait_until_click").on("click",function (e){
     e.stopPropagation();
     $("#data_base_trigger ").modal("show");
-    var order = $(this).attr('order-id');
-    $("input[name='wait_order']").val(order);
+    var order3 = $(this).attr('order-id');
+        console.log(order3)
+
+    $("input[name='wait_order']").val(order3);
 });
 $(".tag_click").on("click",function (e){
     e.stopPropagation();
     $("#select_tag_trigger ").modal("show");
-    var order = $(this).attr('order-id');
-    $("input[name='tag_order']").val(order);
+    var order4 = $(this).attr('order-id');
+    console.log(order4)
+    $("input[name='tag_order']").val(order4);
 });
 

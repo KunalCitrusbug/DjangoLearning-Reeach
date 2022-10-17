@@ -3,17 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b2f0ea75-689b-41dc-934c-b8b0cb1cd883" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Client/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reeach/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reeach/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaign/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaign/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaign/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaign/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/campaign/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/campaign/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/css/_common.scss" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/css/_common.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/css/campaign_creation.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/css/campaign_creation.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/assets/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/js/custom.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/client/campaigns_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/client/campaigns_edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/client/create_campaign.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/client/create_campaign.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +82,7 @@
       <workItem from="1665467886369" duration="1929000" />
       <workItem from="1665470023693" duration="19711000" />
       <workItem from="1665732875287" duration="235000" />
-      <workItem from="1665978966061" duration="25004000" />
+      <workItem from="1665978966061" duration="26660000" />
     </task>
     <servers />
   </component>

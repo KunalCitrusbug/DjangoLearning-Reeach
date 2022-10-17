@@ -180,16 +180,16 @@
                                     <a href="javascript:;" class="plus_icon" id="wait_plus" data-action-count = {{ forloop.counter }}></a>
                                 </div>
                                 <ul class="trigger_dropdown">
-                                    <li><a href="javascript:;" class="text_msg_click"><img
+                                    <li><a href="javascript:;" order-id={{ forloop.counter }} class="text_msg_click"><img
                                             src="{% static 'assets/images/icons/message.svg' %}" alt="image">Text
                                         Message</a></li>
-                                    <li><a href="javascript:;" class="time_delay_click"><img
+                                    <li><a href="javascript:;" order-id={{ forloop.counter }} class="time_delay_click"><img
                                             src="{% static 'assets/images/icons/time.svg' %}" alt="image">Time Delay</a>
                                     </li>
-                                    <li><a href="javascript:;" class="wait_until_click"><img
+                                    <li><a href="javascript:;" order-id={{ forloop.counter }} class="wait_until_click"><img
                                             src="{% static 'assets/images/icons/wait.svg' %}" alt="image">Wait Until</a>
                                     </li>
-                                    <li><a href="javascript:;" class="tag_click"><img
+                                    <li><a href="javascript:;" order-id={{ forloop.counter }} class="tag_click"><img
                                             src="{% static 'assets/images/icons/tag.svg' %}" alt="image">Tag</a></li>
                                 </ul>
                             </div>
@@ -233,16 +233,16 @@
                                         <a href="javascript:;" class="plus_icon" id="tag_plus" data-action-count = {{ forloop.counter }}></a>
                                     </div>
                                     <ul class="trigger_dropdown">
-                                        <li><a href="javascript:;" class="text_msg_click"><img
+                                        <li><a href="javascript:;" order-id={{ forloop.counter }} class="text_msg_click"><img
                                                 src="{% static 'assets/images/icons/message.svg' %}" alt="image">Text
                                             Message</a></li>
-                                        <li><a href="javascript:;" class="time_delay_click"><img
+                                        <li><a href="javascript:;" order-id={{ forloop.counter }} class="time_delay_click"><img
                                                 src="{% static 'assets/images/icons/time.svg' %}" alt="image">Time Delay</a>
                                         </li>
-                                        <li><a href="javascript:;" class="wait_until_click"><img
+                                        <li><a href="javascript:;" order-id={{ forloop.counter }} class="wait_until_click"><img
                                                 src="{% static 'assets/images/icons/wait.svg' %}" alt="image">Wait Until</a>
                                         </li>
-                                        <li><a href="javascript:;" class="tag_click"><img
+                                        <li><a href="javascript:;" order-id={{ forloop.counter }} class="tag_click"><img
                                                 src="{% static 'assets/images/icons/tag.svg' %}" alt="image">Tag</a>
                                         </li>
                                     </ul>
