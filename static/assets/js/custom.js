@@ -720,19 +720,27 @@ $(".cancel_btn").on("click",function (e){
 $(".text_msg_click").on("click",function (e){
     e.stopPropagation();
     $("#text_message ").modal("show");
+      var order = $(this).attr('order-id');
+      $("input[name='message_order']").val(order);
 });
 
 $(".time_delay_click").on("click",function (e){
     e.stopPropagation();
     $("#time_delay ").modal("show");
+    var order = $(this).attr('order-id');
+    $("input[name='time_order']").val(order);
 });
 
 $(".wait_until_click").on("click",function (e){
     e.stopPropagation();
     $("#data_base_trigger ").modal("show");
+    var order = $(this).attr('order-id');
+    $("input[name='wait_order']").val(order);
 });
 $(".tag_click").on("click",function (e){
     e.stopPropagation();
     $("#select_tag_trigger ").modal("show");
+    var order = $(this).attr('order-id');
+    $("input[name='tag_order']").val(order);
 });
 

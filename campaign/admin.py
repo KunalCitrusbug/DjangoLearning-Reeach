@@ -23,6 +23,13 @@ class TriggerAdmin(admin.ModelAdmin):
     ]
 
 
+class ActionAdmin(admin.ModelAdmin):
+    list_display = [
+        "campaign",
+        "type",
+    ]
+
+
 admin.site.register(Campaign, CampaignAdmin)
-admin.site.register(Action)
+admin.site.register(Action, ActionAdmin)
 admin.site.register(Trigger, TriggerAdmin)

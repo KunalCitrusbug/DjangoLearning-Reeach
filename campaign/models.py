@@ -70,9 +70,26 @@ class Trigger(models.Model):
     select_date = models.ForeignKey(ClientEvents, on_delete=models.CASCADE, null=True, blank=True)
     select_before_date = models.CharField(max_length=2, null=True, blank=True, choices=DAYS_CHOICES)
     select_tags = models.ForeignKey(Tag, on_delete=models.CASCADE, null=True, blank=True)
-    
-    
+
+
 class Action(models.Model):
+    # campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
+    # type = models.CharField(max_length=100)
+    # action = models.TextField(blank=True,null=True)
+    # order = models.IntegerField(blank=True,null=True)
+    DURATION_CHOICES = (
+        ("minutes", "minutes"),
+        ("hours", "hours"),
+        ("days", "days")
+    )
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
-    action = models.TextField(blank=True,null=True)
-    order = models.IntegerField(blank=True,null=True)
+    type = models.CharField(max_length=100)
+    text_message = models.TextField(max_length=300, null=True, blank=True)
+    number = models.CharField(null=True, blank=True, max_length=50)
+    duration = models.CharField(choices=DURATION_CHOICES, null=True, blank=True, max_length=50)
+    wait_until = models.TimeField(null=True, blank=True)
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, null=True, blank=True)
+    order = models.IntegerField(null=True,blank=True)
+
+    def __str__(self):
+        return self.type

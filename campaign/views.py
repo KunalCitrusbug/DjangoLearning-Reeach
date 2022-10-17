@@ -107,15 +107,20 @@ class UpdateCampaign(View):
 
     def get(self, *args, **kwargs):
         campaign_obj = get_object_or_404(Campaign, id=kwargs.get('pk'))
+        action_obj = Action.objects.filter(campaign=campaign_obj).order_by('order')
         min_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
                     27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
                     2, 53, 54, 55, 56, 57, 58, 59]
         trigger_obj = get_object_or_404(Trigger, campaign=campaign_obj)
+        time = datetime.datetime.now().strftime("%H:%M:%S")
+
         context = {"campaign_obj": campaign_obj, 'trigger_obj': trigger_obj,
                    "client_phone": ClientPhone.objects.filter(user=self.request.user),
                    "time_obj": Time.objects.all(),
                    "min_list": min_list,
-                   "tags": Tag.objects.all()}
+                   "tags": Tag.objects.all(),
+                   "action_obj": action_obj,
+                   "time": time}
         return render(self.request, self.template_name, context)
 
 
@@ -183,36 +188,60 @@ class UpdateSettings(View):
 
 class AddActions(View):
     def post(self, *args, **kwargs):
+        campaign_obj = get_object_or_404(Campaign, id=kwargs.get('pk'))
+        order = self.request.POST.get("order")
         if self.request.POST.get("type") == "text_message":
-            campaign_obj = get_object_or_404(Campaign, id=kwargs.get('pk'))
-            Action.objects.create(
-                campaign=campaign_obj,
-                action = """{type: {},action:{}}""".format(self.request.POST.get("type"),self.request.POST.get("text_message"))
-            )
-            return JsonResponse({'status': 'success'})
-        
-        if self.request.POST.get("type") == "time_delay":
-            campaign_obj = get_object_or_404(Campaign, id=kwargs.get('pk'))
+            order_obj = Action.objects.filter(campaign=campaign_obj, order__gte=order)
+            for i in order_obj:
+                i.order += 1
+                i.save()
             Action.objects.create(
                 campaign=campaign_obj,
                 type=self.request.POST.get("type"),
-                action = "{type: {},action:{}}".format(self.request.POST.get("type"),self.request.POST.get("text_message"))
+                text_message=self.request.POST.get("text_message"),
+                order=order
             )
             return JsonResponse({'status': 'success'})
-        
+
+        if self.request.POST.get("type") == "time_delay":
+            order_obj = Action.objects.filter(campaign=campaign_obj, order__gte=order)
+            for i in order_obj:
+                i.order += 1
+                i.save()
+            Action.objects.create(
+                campaign=campaign_obj,
+                type=self.request.POST.get("type"),
+                number=self.request.POST.get("time_delay_no"),
+                duration=self.request.POST.get("duration"),
+                order=order,
+            )
+            return JsonResponse({'status': 'success'})
+
         if self.request.POST.get("type") == "wait_until":
-            campaign_obj = get_object_or_404(Campaign, id=kwargs.get('pk'))
+            hour = int(self.request.POST.get("wait_hour"))
+            minute = int(self.request.POST.get("wait_minute"))
+            time = datetime.time(hour, minute, 00)
+            order_obj = Action.objects.filter(campaign=campaign_obj, order__gte=order)
+            for i in order_obj:
+                i.order += 1
+                i.save()
             Action.objects.create(
                 campaign=campaign_obj,
-                text_message=self.request.POST.get("text_message"),
+                type=self.request.POST.get("type"),
+                wait_until=time,
+                order=order
             )
             return JsonResponse({'status': 'success'})
-        
+
         if self.request.POST.get("type") == "tag":
-            campaign_obj = get_object_or_404(Campaign, id=kwargs.get('pk'))
+            order_obj = Action.objects.filter(campaign=campaign_obj, order__gte=order)
+            for i in order_obj:
+                i.order += 1
+                i.save()
             Action.objects.create(
                 campaign=campaign_obj,
-                text_message=self.request.POST.get("text_message"),
+                type=self.request.POST.get("type"),
+                tag=Tag.objects.get(name=self.request.POST.get("tagg")),
+                order=order
             )
             return JsonResponse({'status': 'success'})
-        

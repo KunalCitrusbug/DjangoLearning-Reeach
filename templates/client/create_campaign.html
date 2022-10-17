@@ -110,24 +110,7 @@
                                             src="{% static 'assets/images/icons/tag.svg' %}" alt="image">Tag</a></li>
                                 </ul>
                             </div>
-                            <div class="trigger_textbox">
-                                <div class="text_message_title">
-                                    <img src="{% static 'assets/images/icons/message.svg' %}" alt="message">
-                                    <h5>Text Message</h5>
-                                </div>
-                                <p>
-                                    {FirstName} Treat yourself for the new year😄 All personal training sessions ...
-                                </p>
-                            </div>
-                            <div class="add_btn_box">
-                                <a href="javascript:;" class="plus_icon"></a>
-                            </div>
-                            <div class="wait_label">
-                                <h5>Wait for 2 Hours</h5>
-                            </div>
-                            <div class="add_btn_box">
-                                <a href="javascript:;" class="plus_icon"></a>
-                            </div>
+
                             <div class="end_label">
                                 <img src="{% static 'assets/images/icons/flag.svg' %}" alt="flag">
                                 <h5>end</h5>
@@ -491,18 +474,6 @@
         </div>
     </div>
 
-    <!--Triggers Buttons-->
-    <a href="javascript:;" class="rw_btn" data-bs-toggle="modal" data-bs-target="#text_message">Text Message</a>
-    <a href="javascript:;" class="rw_btn" data-bs-toggle="modal" data-bs-target="#time_delay">Time Delay</a>
-    <a href="javascript:;" class="rw_btn" data-bs-toggle="modal" data-bs-target="#data_base_trigger">Data Base
-        Trigger</a>
-    <a href="javascript:;" class="rw_btn" data-bs-toggle="modal" data-bs-target="#Trigger">Trigger</a>
-    <a href="javascript:;" class="rw_btn" data-bs-toggle="modal" data-bs-target="#select_tag_trigger">Select Tag
-        Trigger</a>
-    <a href="javascript:;" class="rw_btn" data-bs-toggle="modal" data-bs-target="#data_based_trigger">Data based
-        trigger</a>
-    <a href="javascript:;" class="rw_btn" data-bs-toggle="modal" data-bs-target="#keyword_trigger">Keyword Trigger</a>
-    <!--Trigger Modals-->
 
     <div class="modal fade rw_modal campaign_modal add_contact" id="keyword_trigger" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -688,7 +659,16 @@
                             </div>
                             <div class="rw_form_inputs">
                                 <label class="rw_form_label">Select Tags</label>
-                            d
+                                <input type="hidden" name="tag_order" id="tag_hidden">
+                                <div class="rw_bootstrap_drop_down">
+                                    <div class="dropdown">
+                                        <select class="dropdown-toggle" name="tagg" id="tagg">
+                                            {% for tag in tags %}
+                                                <option class="dropdown-item" value="{{ tag }}">{{ tag }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <div class="textmessage_footer">
                                 <ul>
