@@ -750,3 +750,9 @@ $(".tag_click").on("click",function (e){
     $("input[name='tag_order']").val(order4);
 });
 
+$(".camp_edit_icon").on("click",function (e){
+  e.stopPropagation();
+  $("#edit_name_modal ").modal("show");
+
+});
+

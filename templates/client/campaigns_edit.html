@@ -29,13 +29,13 @@
             <a href="{% url 'campaign:campaign' %}" class="back_arrow"><img
                     src="{% static 'assets/images/icons/camp_back_arrow.svg' %}"
                     alt="back_arrow"></a>
-            <a href="javascript:;" class="campaign_time_header"
+            <a href="javascript:" class="campaign_time_header"
                data-custom-value="{{ campaign_obj.name }}">{{ campaign_obj.name }}
                 <img src="{% static 'assets/images/icons/edit_dark.svg' %}" class="camp_edit_icon" alt="edit">
             </a>
         </div>
         <div class="header_profile">
-            <a href="javascript:;">
+            <a href="javascript:">
                 <h4>Jones Ferdinand</h4>
                 <div class="header_profile_image">
                     <img src="{% static 'assets/images/profile.jpg' %}" alt="image">
@@ -74,11 +74,11 @@
     <div class="rw_tabs">
         <ul class="nav rw_tab_ul" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <a href="javascript:;" class="active tab_link" id="campaigns_action_tab" data-bs-toggle="tab"
+                <a href="javascript:" class="active tab_link" id="campaigns_action_tab" data-bs-toggle="tab"
                    data-bs-target="#campaigns_action" role="tab" aria-selected="true">actions</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a href="javascript:;" class="tab_link" id="campaigns_setting_tab" data-bs-toggle="tab"
+                <a href="javascript:" class="tab_link" id="campaigns_setting_tab" data-bs-toggle="tab"
                    data-bs-target="#campaigns_setting" role="tab" aria-selected="false">Settings</a>
             </li>
         </ul>
@@ -101,178 +101,206 @@
                                     {% if trigger_obj.type == "keyword_based_trigger" %}
                                         <h5>Keyword</h5>
                                         <ul>
-                                            <li><a href="javascript:;">{{ trigger_obj.keyword }}</a></li>
+                                            <li><a href="javascript:">{{ trigger_obj.keyword }}</a></li>
                                         </ul>
                                     {% elif trigger_obj.type == "date_based_trigger" %}
                                         <h5>Date Based</h5>
                                         <ul>
                                             <li>
-                                                <a href="javascript:;">{{ trigger_obj.select_date.name }}(-{{ trigger_obj.select_before_date }}days)</a>
+                                                <a href="javascript:">{{ trigger_obj.select_date.name }}(-{{ trigger_obj.select_before_date }}days)</a>
                                             </li>
                                         </ul>
 
                                     {% elif trigger_obj.type == "tag_based_trigger" %}
                                         <h5>Tag Based</h5>
                                         <ul>
-                                            <li><a href="javascript:;">{{ trigger_obj.select_tags }}</a></li>
+                                            <li><a href="javascript:">{{ trigger_obj.select_tags }}</a></li>
                                         </ul>
                                     {% endif %}
                                 </div>
                             </div>
                             <div class="campiagns_plus trigger_dropdown">
                                 <div class="add_btn_box trigg_add_btn">
-                                    <a href="javascript:;" class="plus_icon"></a>
+                                    <a href="javascript:" class="plus_icon"></a>
                                 </div>
                                 <ul class="trigger_dropdown">
-                                    <li><a href="javascript:;" order-id="0" class="text_msg_click"
+                                    <li><a href="javascript:" order-id="0" class="text_msg_click"
                                            data-action-url="{% url 'campaign:add_actions' campaign_obj.pk %}">
-                                            <img src="{% static 'assets/images/icons/message.svg' %}" alt="image">Text
-                                            Message</a></li>
-                                    <li><a href="javascript:;" order-id="0" class="time_delay_click"><img
-                                            src="{% static 'assets/images/icons/time.svg' %}" alt="image">Time Delay</a>
-                                    </li>
-                                    <li><a href="javascript:;" order-id="0" class="wait_until_click"><img
-                                            src="{% static 'assets/images/icons/wait.svg' %}" alt="image">Wait Until</a>
-                                    </li>
-                                    <li><a href="javascript:;" order-id="0" class="tag_click"><img
-                                            src="{% static 'assets/images/icons/tag.svg' %}" alt="image">Tag</a></li>
-                                </ul>
-                            </div>
-                        {% for action in action_obj %}
-                            {#-------------------TEXT MESSAGE ACTION----------------------#}
-                            {% if action.type == "text_message" %}
-                                <div class="trigger_textbox">
-                                    <div class="text_message_title">
-                                        <img src="{% static 'assets/images/icons/message.svg' %}" alt="message">
-                                        <h5>Text Message</h5>
-                                    </div>
-                                    <p class="text_body">
-                                        {{ action.text_message}}
-                                    </p>
-                                </div>
-                               <div class="campiagns_plus trigger_dropdown">
-                                <div class="add_btn_box trigg_add_btn">
-                                    <a href="javascript:;" class="plus_icon" id="text_plus"></a>
-                                </div>
-                                <ul class="trigger_dropdown">
-                                     <li><a href="javascript:;" order-id={{ forloop.counter }} class="text_msg_click"
-                                           data-action-url="{% url 'campaign:add_actions' campaign_obj.pk %}">
-                                            <img src="{% static 'assets/images/icons/message.svg' %}" alt="image">Text
-                                            Message</a></li>
-                                    <li><a href="javascript:;" order-id={{ forloop.counter }} class="time_delay_click"><img
-                                            src="{% static 'assets/images/icons/time.svg' %}" alt="image">Time Delay</a>
-                                    </li>
-                                    <li><a href="javascript:;" order-id={{ forloop.counter }} class="wait_until_click"><img
-                                            src="{% static 'assets/images/icons/wait.svg' %}" alt="image">Wait Until</a>
-                                    </li>
-                                    <li><a href="javascript:;" order-id={{ forloop.counter }} class="tag_click"><img
-                                            src="{% static 'assets/images/icons/tag.svg' %}" alt="image">Tag</a></li>
-                                </ul>
-                            </div>
-                            {% endif %}
-                            {#-------------------WAIT UNTIL ACTION----------------------#}
-                            {% if action.type == "wait_until" %}
-                                <div class="wait_label">
-                                    <h5>Wait till {{ action.wait_until }}</h5>
-                                </div>
-                                <div class="campiagns_plus trigger_dropdown">
-                                <div class="add_btn_box trigg_add_btn">
-                                    <a href="javascript:;" class="plus_icon" id="wait_plus" data-action-count = {{ forloop.counter }}></a>
-                                </div>
-                                <ul class="trigger_dropdown">
-                                    <li><a href="javascript:;" order-id={{ forloop.counter }} class="text_msg_click"><img
-                                            src="{% static 'assets/images/icons/message.svg' %}" alt="image">Text
+                                        <img src="{% static 'assets/images/icons/message.svg' %}" alt="image">Text
                                         Message</a></li>
-                                    <li><a href="javascript:;" order-id={{ forloop.counter }} class="time_delay_click"><img
+                                    <li><a href="javascript:" order-id="0" class="time_delay_click"><img
                                             src="{% static 'assets/images/icons/time.svg' %}" alt="image">Time Delay</a>
                                     </li>
-                                    <li><a href="javascript:;" order-id={{ forloop.counter }} class="wait_until_click"><img
+                                    <li><a href="javascript:" order-id="0" class="wait_until_click"><img
                                             src="{% static 'assets/images/icons/wait.svg' %}" alt="image">Wait Until</a>
                                     </li>
-                                    <li><a href="javascript:;" order-id={{ forloop.counter }} class="tag_click"><img
+                                    <li><a href="javascript:" order-id="0" class="tag_click"><img
                                             src="{% static 'assets/images/icons/tag.svg' %}" alt="image">Tag</a></li>
                                 </ul>
                             </div>
-                            {% endif %}
-                            {#-------------------TAG ACTION----------------------#}
-                            {% if action.type == "tag" %}
-                                <div class="campaigns_trigger_inner campaign_tag_inner"><a href="javascript:;"
+                            {% for action in action_obj %}
+                                {#-------------------TEXT MESSAGE ACTION----------------------#}
+                                {% if action.type == "text_message" %}
+                                    <div class="trigger_textbox">
+                                        <div class="text_message_title">
+                                            <img src="{% static 'assets/images/icons/message.svg' %}" alt="message">
+                                            <h5>Text Message</h5>
+                                        </div>
+                                        <p class="text_body">
+                                            {{ action.text_message }}
+                                        </p>
+                                    </div>
+                                    <div class="campiagns_plus trigger_dropdown">
+                                        <div class="add_btn_box trigg_add_btn">
+                                            <a href="javascript:" class="plus_icon" id="text_plus"></a>
+                                        </div>
+                                        <ul class="trigger_dropdown">
+                                            <li><a href="javascript:"
+                                                   order-id={{ forloop.counter }} class="text_msg_click"
+                                                   data-action-url="{% url 'campaign:add_actions' campaign_obj.pk %}">
+                                                <img src="{% static 'assets/images/icons/message.svg' %}" alt="image">Text
+                                                Message</a></li>
+                                            <li><a href="javascript:"
+                                                   order-id={{ forloop.counter }} class="time_delay_click"><img
+                                                    src="{% static 'assets/images/icons/time.svg' %}" alt="image">Time
+                                                Delay</a>
+                                            </li>
+                                            <li><a href="javascript:"
+                                                   order-id={{ forloop.counter }} class="wait_until_click"><img
+                                                    src="{% static 'assets/images/icons/wait.svg' %}" alt="image">Wait
+                                                Until</a>
+                                            </li>
+                                            <li><a href="javascript:"
+                                                   order-id={{ forloop.counter }} class="tag_click"><img
+                                                    src="{% static 'assets/images/icons/tag.svg' %}" alt="image">Tag</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                                {#-------------------WAIT UNTIL ACTION----------------------#}
+                                {% if action.type == "wait_until" %}
+                                    <div class="wait_label">
+                                        <h5>Wait till {{ action.wait_until }}</h5>
+                                    </div>
+                                    <div class="campiagns_plus trigger_dropdown">
+                                        <div class="add_btn_box trigg_add_btn">
+                                            <a href="javascript:" class="plus_icon" id="wait_plus"
+                                               data-action-count= {{ forloop.counter }}></a>
+                                        </div>
+                                        <ul class="trigger_dropdown">
+                                            <li><a href="javascript:"
+                                                   order-id={{ forloop.counter }} class="text_msg_click"><img
+                                                    src="{% static 'assets/images/icons/message.svg' %}" alt="image">Text
+                                                Message</a></li>
+                                            <li><a href="javascript:"
+                                                   order-id={{ forloop.counter }} class="time_delay_click"><img
+                                                    src="{% static 'assets/images/icons/time.svg' %}" alt="image">Time
+                                                Delay</a>
+                                            </li>
+                                            <li><a href="javascript:"
+                                                   order-id={{ forloop.counter }} class="wait_until_click"><img
+                                                    src="{% static 'assets/images/icons/wait.svg' %}" alt="image">Wait
+                                                Until</a>
+                                            </li>
+                                            <li><a href="javascript:"
+                                                   order-id={{ forloop.counter }} class="tag_click"><img
+                                                    src="{% static 'assets/images/icons/tag.svg' %}" alt="image">Tag</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                                {#-------------------TAG ACTION----------------------#}
+                                {% if action.type == "tag" %}
+                                    <div class="campaigns_trigger_inner campaign_tag_inner"><a href="javascript:"
+                                                                                               class="remove_action edit_cam_action"
+                                                                                               data-bs-toggle="modal"
+                                                                                               model-id="3479"
+                                                                                               draggable="false">
+                                        <div class="trigger_title_head">
+                                            <div class="trigger_title">
+                                                <img src="{% static 'assets/images/icons/add_box.svg' %}"
+                                                     alt="flash_on">
+                                                <h5>Tag</h5>
+                                            </div>
+                                        </div>
+                                    </a>
+                                        <div class="camp_keyword"><a href="javascript:"
+                                                                     class="remove_action edit_cam_action"
+                                                                     data-bs-toggle="modal" model-id="3479"
+                                                                     draggable="false">
+                                        </a>
+                                            <ul class="edit_cam_action" model-id="3479"><a href="javascript:"
                                                                                            class="remove_action edit_cam_action"
                                                                                            data-bs-toggle="modal"
                                                                                            model-id="3479"
                                                                                            draggable="false">
-                                    <div class="trigger_title_head">
-                                        <div class="trigger_title">
-                                            <img src="{% static 'assets/images/icons/add_box.svg' %}" alt="flash_on">
-                                            <h5>Tag</h5>
+                                            </a>
+                                                <li class="click_tag_list"><a href="javascript:"
+                                                                              class="remove_action edit_cam_action"
+                                                                              data-bs-toggle="modal" model-id="3479"
+                                                                              draggable="false"></a><a
+                                                        href="javascript:"
+                                                        draggable="false">{{ action.tag }}</a>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
-                                </a>
-                                    <div class="camp_keyword"><a href="javascript:;"
-                                                                 class="remove_action edit_cam_action"
-                                                                 data-bs-toggle="modal" model-id="3479"
-                                                                 draggable="false">
-                                    </a>
-                                        <ul class="edit_cam_action" model-id="3479"><a href="javascript:;"
-                                                                                       class="remove_action edit_cam_action"
-                                                                                       data-bs-toggle="modal"
-                                                                                       model-id="3479"
-                                                                                       draggable="false">
-                                        </a>
-                                            <li class="click_tag_list"><a href="javascript:;"
-                                                                          class="remove_action edit_cam_action"
-                                                                          data-bs-toggle="modal" model-id="3479"
-                                                                          draggable="false"></a><a href="javascript:;"
-                                                                                                   draggable="false">{{ action.tag }}</a>
+                                    <div class="campiagns_plus trigger_dropdown">
+                                        <div class="add_btn_box trigg_add_btn">
+                                            <a href="javascript:" class="plus_icon" id="tag_plus"
+                                               data-action-count= {{ forloop.counter }}></a>
+                                        </div>
+                                        <ul class="trigger_dropdown">
+                                            <li><a href="javascript:"
+                                                   order-id={{ forloop.counter }} class="text_msg_click"><img
+                                                    src="{% static 'assets/images/icons/message.svg' %}" alt="image">Text
+                                                Message</a></li>
+                                            <li><a href="javascript:"
+                                                   order-id={{ forloop.counter }} class="time_delay_click"><img
+                                                    src="{% static 'assets/images/icons/time.svg' %}" alt="image">Time
+                                                Delay</a>
+                                            </li>
+                                            <li><a href="javascript:"
+                                                   order-id={{ forloop.counter }} class="wait_until_click"><img
+                                                    src="{% static 'assets/images/icons/wait.svg' %}" alt="image">Wait
+                                                Until</a>
+                                            </li>
+                                            <li><a href="javascript:"
+                                                   order-id={{ forloop.counter }} class="tag_click"><img
+                                                    src="{% static 'assets/images/icons/tag.svg' %}" alt="image">Tag</a>
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
-                                <div class="campiagns_plus trigger_dropdown">
-                                    <div class="add_btn_box trigg_add_btn">
-                                        <a href="javascript:;" class="plus_icon" id="tag_plus" data-action-count = {{ forloop.counter }}></a>
+                                {% endif %}
+                                {#-------------------TIME DELAY ACTION----------------------#}
+                                {% if action.type == "time_delay" %}
+                                    <div class="wait_label">
+                                        <h5>Wait for {{ action.number }} {{ action.duration }}</h5>
                                     </div>
-                                    <ul class="trigger_dropdown">
-                                        <li><a href="javascript:;" order-id={{ forloop.counter }} class="text_msg_click"><img
-                                                src="{% static 'assets/images/icons/message.svg' %}" alt="image">Text
-                                            Message</a></li>
-                                        <li><a href="javascript:;" order-id={{ forloop.counter }} class="time_delay_click"><img
-                                                src="{% static 'assets/images/icons/time.svg' %}" alt="image">Time Delay</a>
-                                        </li>
-                                        <li><a href="javascript:;" order-id={{ forloop.counter }} class="wait_until_click"><img
-                                                src="{% static 'assets/images/icons/wait.svg' %}" alt="image">Wait Until</a>
-                                        </li>
-                                        <li><a href="javascript:;" order-id={{ forloop.counter }} class="tag_click"><img
-                                                src="{% static 'assets/images/icons/tag.svg' %}" alt="image">Tag</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            {% endif %}
-                            {#-------------------TIME DELAY ACTION----------------------#}
-                            {% if action.type == "time_delay" %}
-                                 <div class="wait_label">
-                                    <h5>Wait for {{ action.number }} {{ action.duration }}</h5>
-                                </div>
-                                <div class="campiagns_plus trigger_dropdown">
-                                <div class="add_btn_box trigg_add_btn">
-                                    <a href="javascript:;" class="plus_icon" id="time_plus" data-action-count = {{ forloop.counter }}></a>
-                                </div>
-                                <ul class="trigger_dropdown">
-                                    <li><a href="javascript:;" class="text_msg_click"><img
-                                            src="{% static 'assets/images/icons/message.svg' %}" alt="image">Text
-                                        Message</a></li>
-                                    <li><a href="javascript:;" class="time_delay_click"><img
-                                            src="{% static 'assets/images/icons/time.svg' %}" alt="image">Time Delay</a>
-                                    </li>
-                                    <li><a href="javascript:;" class="wait_until_click"><img
-                                            src="{% static 'assets/images/icons/wait.svg' %}" alt="image">Wait Until</a>
-                                    </li>
-                                    <li><a href="javascript:;" class="tag_click"><img
-                                            src="{% static 'assets/images/icons/tag.svg' %}" alt="image">Tag</a></li>
-                                </ul>
-                            </div>
-                            {% endif %}
-                        {% endfor %}
+                                    <div class="campiagns_plus trigger_dropdown">
+                                        <div class="add_btn_box trigg_add_btn">
+                                            <a href="javascript:" class="plus_icon" id="time_plus"
+                                               data-action-count= {{ forloop.counter }}></a>
+                                        </div>
+                                        <ul class="trigger_dropdown">
+                                            <li><a href="javascript:" class="text_msg_click"><img
+                                                    src="{% static 'assets/images/icons/message.svg' %}" alt="image">Text
+                                                Message</a></li>
+                                            <li><a href="javascript:" class="time_delay_click"><img
+                                                    src="{% static 'assets/images/icons/time.svg' %}" alt="image">Time
+                                                Delay</a>
+                                            </li>
+                                            <li><a href="javascript:" class="wait_until_click"><img
+                                                    src="{% static 'assets/images/icons/wait.svg' %}" alt="image">Wait
+                                                Until</a>
+                                            </li>
+                                            <li><a href="javascript:" class="tag_click"><img
+                                                    src="{% static 'assets/images/icons/tag.svg' %}" alt="image">Tag</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
                             <div class="end_label">
                                 <img src="{% static 'assets/images/icons/flag.svg' %}" alt="flag">
                                 <h5>end</h5>
@@ -507,6 +535,18 @@
                                                         <div class="rw_form_inputs mb-3">
                                                             <label class="rw_form_label">keywords</label>
                                                             <input type="email" placeholder="
+
+
+
+
+
+
+
+
+
+
+
+
                                                                     {% if campaign_obj.double_optin_keyword %}{{ campaign_obj.double_optin_keyword }}{% else %}Enter Keyword {% endif %}"
                                                                    id="double_optin_keyword" name="keyword"
                                                                    maxlength="30"
@@ -531,6 +571,18 @@
                                                             <label class="rw_form_label">Double Optin Message</label>
                                                             <div class="rw_input">
                                                                 <textarea id="Double_optin_message" placeholder="
+
+
+
+
+
+
+
+
+
+
+
+
                                                                         {% if campaign_obj.double_optin_message %}{{ campaign_obj.double_optin_message }}{% else %}Type Message{% endif %}"></textarea>
                                                             </div>
                                                         </div>
@@ -577,6 +629,18 @@
                                                             <label class="rw_form_label">Limit Multiple Message</label>
                                                             <div class="rw_input">
                                                                 <textarea id="Limit_multiple_message" placeholder="
+
+
+
+
+
+
+
+
+
+
+
+
                                                                         {% if campaign_obj.limit_multiple_message %}{{ campaign_obj.limit_multiple_message }}{% else %}Type Message{% endif %}"></textarea>
                                                             </div>
                                                         </div>
@@ -646,7 +710,7 @@
                                 </div>
                             </div>
                             <div class="rw_save_btn">
-                                <a href="javascript:;" class="rw_btn" id="save_settings"
+                                <a href="javascript:" class="rw_btn" id="save_settings"
                                    data-action-url="{% url 'campaign:update_settings' campaign_obj.pk %}">Save
                                     Changes</a>
                             </div>
@@ -665,7 +729,7 @@
                     <div class="modal_title">
                         <h4>Keyword Trigger</h4>
                     </div>
-                    <a href="javascript:;" class="popup_close" data-bs-dismiss="modal" aria-label="Close"><img
+                    <a href="javascript:" class="popup_close" data-bs-dismiss="modal" aria-label="Close"><img
                             src="{% static 'assets/images/icons/close.svg' %}" alt="close"></a>
                 </div>
                 <div class="modal-body">
@@ -721,9 +785,9 @@
                             </ul>
                             <div class="textmessage_footer">
                                 <ul>
-                                    <li><a href="javascript:;" class="delete">delete</a></li>
-                                    <li><a href="javascript:;">cancel</a></li>
-                                    <li><a href="javascript:;"
+                                    <li><a href="javascript:" class="delete">delete</a></li>
+                                    <li><a href="javascript:">cancel</a></li>
+                                    <li><a href="javascript:"
                                            class="keyword_save_btn"
                                            data-action-url="{% url 'campaign:create_campaign' %}"
                                     >Save</a></li>
@@ -743,7 +807,7 @@
                     <div class="modal_title">
                         <h4>Date based trigger</h4>
                     </div>
-                    <a href="javascript:;" class="popup_close" data-bs-dismiss="modal" aria-label="Close"><img
+                    <a href="javascript:" class="popup_close" data-bs-dismiss="modal" aria-label="Close"><img
                             src="{% static 'assets/images/icons/close.svg' %}" alt="close"></a>
                 </div>
                 <div class="modal-body">
@@ -802,9 +866,9 @@
                             </ul>
                             <div class="textmessage_footer">
                                 <ul>
-                                    <li><a href="javascript:;" class="delete">delete</a></li>
-                                    <li><a href="javascript:;">cancel</a></li>
-                                    <li><a href="javascript:;"
+                                    <li><a href="javascript:" class="delete">delete</a></li>
+                                    <li><a href="javascript:">cancel</a></li>
+                                    <li><a href="javascript:"
                                            class="date_trigger_save"
                                            data-action-url="{% url 'campaign:create_campaign' %}"
                                     >Save</a></li>
@@ -824,14 +888,14 @@
                     <div class="modal_title">
                         <h4>Select Tag Trigger</h4>
                     </div>
-                    <a href="javascript:;" class="popup_close" data-bs-dismiss="modal" aria-label="Close"><img
+                    <a href="javascript:" class="popup_close" data-bs-dismiss="modal" aria-label="Close"><img
                             src="{% static 'assets/images/icons/close.svg' %}" alt="close"></a>
                 </div>
                 <div class="modal-body">
                     <div class="campaigns_action_content">
                         <div class="campaigns_box camp_absolute trigger_select_tags_box ">
                             <div class="textmessage_box_header">
-                                <a href="javascript:;" class="close camp_close"><img
+                                <a href="javascript:" class="close camp_close"><img
                                         src="{% static 'assets/images/icons/close_dark.svg' %}"
                                         alt="close_dark"></a>
                                 <div class="text_message_title">
@@ -858,8 +922,8 @@
                             </div>
                             <div class="textmessage_footer">
                                 <ul>
-                                    <li><a href="javascript:;">cancel</a></li>
-                                    <li><a href="javascript:;"
+                                    <li><a href="javascript:">cancel</a></li>
+                                    <li><a href="javascript:"
                                            id="action_save_tag"
                                            data-action-url="{% url 'campaign:add_actions' campaign_obj.pk %}">Save</a>
                                     </li>
@@ -878,7 +942,7 @@
                     <div class="modal_title">
                         <h4>Trigger</h4>
                     </div>
-                    <a href="javascript:;" class="popup_close" data-bs-dismiss="modal" aria-label="Close"><img
+                    <a href="javascript:" class="popup_close" data-bs-dismiss="modal" aria-label="Close"><img
                             src="{% static 'assets/images/icons/close.svg' %}" alt="close"></a>
                 </div>
                 <div class="modal-body">
@@ -917,8 +981,8 @@
                             <div class="textmessage_footer">
                                 <ul>
                                     <!-- <li><a href="javascript:;" class="delete">delete</a></li> -->
-                                    <li><a href="javascript:;">cancel</a></li>
-                                    <li><a href="javascript:;" class="rw_btn">Next</a></li>
+                                    <li><a href="javascript:">cancel</a></li>
+                                    <li><a href="javascript:" class="rw_btn">Next</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -934,7 +998,7 @@
                     <div class="modal_title">
                         <h4>Data Base Trigger</h4>
                     </div>
-                    <a href="javascript:;" class="popup_close" data-bs-dismiss="modal" aria-label="Close"><img
+                    <a href="javascript:" class="popup_close" data-bs-dismiss="modal" aria-label="Close"><img
                             src="{% static 'assets/images/icons/close.svg' %}" alt="close"></a>
                 </div>
                 <div class="modal-body">
@@ -968,7 +1032,7 @@
                                                                     value="{{ forloop.counter }}">{{ forloop.counter }}</option>
                                                         {% endfor %}
                                                     </select>
-                                                <input type="hidden" name="wait_order" id="wait_hidden">
+                                                    <input type="hidden" name="wait_order" id="wait_hidden">
                                                 </div>
                                             </div>
                                             <span>:</span>
@@ -999,8 +1063,8 @@
                             </ul>
                             <div class="textmessage_footer">
                                 <ul>
-                                    <li><a href="javascript:;">cancel</a></li>
-                                    <li><a href="javascript:;" class="rw_btn" id="action_save_wait"
+                                    <li><a href="javascript:">cancel</a></li>
+                                    <li><a href="javascript:" class="rw_btn" id="action_save_wait"
                                            data-action-url="{% url 'campaign:add_actions' campaign_obj.pk %}">save</a>
                                     </li>
                                 </ul>
@@ -1018,7 +1082,7 @@
                     <div class="modal_title">
                         <h4>Time Delay</h4>
                     </div>
-                    <a href="javascript:;" class="popup_close" data-bs-dismiss="modal" aria-label="Close"><img
+                    <a href="javascript:" class="popup_close" data-bs-dismiss="modal" aria-label="Close"><img
                             src="{% static 'assets/images/icons/close.svg' %}" alt="close"></a>
                 </div>
                 <div class="modal-body">
@@ -1067,8 +1131,8 @@
                             </div>
                             <div class="textmessage_footer">
                                 <ul>
-                                    <li><a href="javascript:;">cancel</a></li>
-                                    <li><a href="javascript:;" class="rw_btn" id="action_save_time"
+                                    <li><a href="javascript:">cancel</a></li>
+                                    <li><a href="javascript:" class="rw_btn" id="action_save_time"
                                            data-action-url="{% url 'campaign:add_actions' campaign_obj.pk %}">save</a>
                                     </li>
                                 </ul>
@@ -1086,7 +1150,7 @@
                     <div class="modal_title">
                         <h4>Text Message</h4>
                     </div>
-                    <a href="javascript:;" class="popup_close" data-bs-dismiss="modal" aria-label="Close"><img
+                    <a href="javascript:" class="popup_close" data-bs-dismiss="modal" aria-label="Close"><img
                             src="{% static 'assets/images/icons/close.svg' %}" alt="close"></a>
                 </div>
                 <div class="modal-body">
@@ -1100,7 +1164,7 @@
                                 </div>
                             </div>
                             <div class="text_input_box">
-                                 <input type="hidden" id="message_hidden" name="message_order">
+                                <input type="hidden" id="message_hidden" name="message_order">
                                 <textarea class="action_text_message"></textarea>
                                 <div class="input_icon_wrapper">
                                     <div class="input_words">
@@ -1108,13 +1172,13 @@
                                     </div>
                                     <div class="input_icons">
                                         <ul>
-                                            <li><a href="javascript:;"><img
+                                            <li><a href="javascript:"><img
                                                     src="{% static 'assets/images/icons/link_gradient.svg' %}"
                                                     alt="image"></a></li>
-                                            <li><a href="javascript:;"><img
+                                            <li><a href="javascript:"><img
                                                     src="{% static 'assets/images/icons/add_box.svg' %}"
                                                     alt="image"></a></li>
-                                            <li><a href="javascript:;"><img
+                                            <li><a href="javascript:"><img
                                                     src="{% static 'assets/images/icons/sentiment_satisfied.svg' %}"
                                                     alt="image"></a></li>
                                         </ul>
@@ -1123,9 +1187,9 @@
                             </div>
                             <div class="textmessage_footer">
                                 <ul>
-                                    <li><a href="javascript:;" class="delete">delete</a></li>
-                                    <li><a href="javascript:;">cancel</a></li>
-                                    <li><a href="javascript:;" class="rw_btn" id="action_save_message"
+                                    <li><a href="javascript:" class="delete">delete</a></li>
+                                    <li><a href="javascript:">cancel</a></li>
+                                    <li><a href="javascript:" class="rw_btn" id="action_save_message"
                                            data-action-url="{% url 'campaign:add_actions' campaign_obj.pk %}">save</a>
                                     </li>
                                 </ul>
@@ -1147,7 +1211,7 @@
                         <img src="{% static 'assets/images/twilio-logo.svg' %}" alt="twilio-logo">
                         <h4>StarBucks no 1</h4>
                     </div>
-                    <a href="javascript:;" class="popup_close" data-bs-dismiss="modal" aria-label="Close"><img
+                    <a href="javascript:" class="popup_close" data-bs-dismiss="modal" aria-label="Close"><img
                             src="{% static 'assets/images/icons/close.svg' %}" alt="close"></a>
                 </div>
                 <div class="modal-body">
@@ -1173,8 +1237,8 @@
                 </div>
                 <div class="modal-footer">
                     <ul class="modal_btns">
-                        <li><a href="javascript:;" class="modal_btn cancel" data-bs-dismiss="modal">cancel</a></li>
-                        <li><a href="javascript:;" class="modal_btn">save</a></li>
+                        <li><a href="javascript:" class="modal_btn cancel" data-bs-dismiss="modal">cancel</a></li>
+                        <li><a href="javascript:" class="modal_btn">save</a></li>
                     </ul>
                 </div>
             </div>
@@ -1184,10 +1248,67 @@
 <div class="rw_zoom_in_out">
     <h6>80%</h6>
     <ul>
-        <li><a href="javascript:;"><img src="{% static 'assets/images/icons/zoom_in.svg.svg' %}" alt="zoom_in"></a></li>
-        <li><a href="javascript:;"><img src="{% static 'assets/images/icons/zoom_out.svg' %}" alt="zoom_out"></a></li>
+        <li><a href="javascript:"><img src="{% static 'assets/images/icons/zoom_in.svg.svg' %}" alt="zoom_in"></a></li>
+        <li><a href="javascript:"><img src="{% static 'assets/images/icons/zoom_out.svg' %}" alt="zoom_out"></a></li>
     </ul>
 </div>
+
+
+{#-----------------EDIT NAME MODAL--------------------#}
+<div class="modal fade rw_modal campaign_modal add_contact rw_select2_modal show" id="edit_name_modal" tabindex="-1"
+     aria-modal="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal_title">
+                    <h4> Campaign Name </h4>
+                </div>
+                <a href="javascript:" class="popup_close" data-bs-dismiss="modal" aria-label="Close"
+                   draggable="false"><img
+                        src="{% static 'assets/images/icons/close.svg' %}" alt="close"></a>
+            </div>
+            <div class="modal-body">
+                <div class="campaigns_action_content">
+                    <form method="post" action="/client/campaign-edit/3484/" id="name_form">
+                        <input type="hidden" name="csrfmiddlewaretoken"
+                               value="bxAoCR2CKgyTL6RmkIWJyOsjsHk7eMbeQeZ5pbHmzoJjclMDQCGy7lzylQcKsvIF">
+                        <!--                    <input type="hidden" name="campaign_form_name" value="">-->
+                        <div class="campaigns_box camp_absolute trigger_select_tags_box ">
+                            <!-- <div class="textmessage_box_header">
+                            </div> -->
+
+                            <div class="rw_form_inputs" id="div_campaign_name">
+                                <label class="rw_form_label">Campaign Name</label>
+                                <div class="rw_input">
+                                    <label for="campaign_name"></label><input type="email" placeholder="Enter Keyword"
+                                                                              id="campaign_name"
+                                                                              name="campaign_form_name"
+                                                                              value="{{ campaign_obj.name }}"
+                                                                              maxlength="30">
+                                </div>
+                                <div class="form_error" id="campaign_name_error"></div>
+
+                            </div>
+                            <div class="textmessage_footer">
+
+
+                                <ul>
+                                    <!-- <li><a href="javascript:;" class="delete">delete</a></li> -->
+                                    <li><a href="javascript:" class="popup_close" data-bs-dismiss="modal"
+                                           aria-label="Close" draggable="false">cancel</a></li>
+                                    <li><a href="javascript:" class="rw_btn" id="name_btn"
+                                           data-action-url="{% url 'campaign:campaign_edit' campaign_obj.pk %}"
+                                           draggable="false">Save</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{#-------------------------------END EDIT NAME MODAL HERE---------------------#}
 <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
 <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'assets/js/jquery.dataTables.min.js' %}"></script>
@@ -1307,7 +1428,7 @@
                 'csrfmiddlewaretoken': csrf_token,
                 "text_message": text_message,
                 "type": type,
-                "order":order,
+                "order": order,
             },
             success: function (response) {
                 window.location.reload()
@@ -1332,7 +1453,7 @@
                 "time_delay_no": time_delay_no,
                 "duration": duration,
                 'type': type,
-                "order":order
+                "order": order
             },
             success: function (response) {
                 window.location.reload()
@@ -1357,7 +1478,7 @@
                 "wait_hour": wait_hour,
                 "wait_minute": wait_minute,
                 'type': type,
-                "order":order
+                "order": order
 
 
             },
@@ -1380,7 +1501,28 @@
                 'csrfmiddlewaretoken': csrf_token,
                 "tagg": tagg,
                 'type': type,
-                "order":order
+                "order": order
+            },
+            success: function (response) {
+                window.location.reload()
+            }
+        });
+    });
+
+    {#---------NAME EDIT AJAX CALL----------#}
+    $('#name_btn').click(function () {
+        var csrf_token = '{{csrf_token}}'
+        var type = "name_change";
+        var name = $('#campaign_name').val();
+
+        // AJAX request
+        $.ajax({
+            url: $(this).attr('data-action-url'),
+            type: 'post',
+            data: {
+                'csrfmiddlewaretoken': csrf_token,
+                'type': type,
+                "name": name
             },
             success: function (response) {
                 window.location.reload()

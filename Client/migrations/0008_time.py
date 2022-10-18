@@ -6,16 +6,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Client', '0007_rename_tags_tag'),
+        ("Client", "0007_rename_tags_tag"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Time',
+            name="Time",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50)),
-                ('time', models.TimeField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=50)),
+                ("time", models.TimeField()),
             ],
         ),
     ]

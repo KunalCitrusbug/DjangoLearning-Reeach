@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Client', '0001_initial'),
+        ("Client", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='clientevents',
-            options={'verbose_name': 'ClientEvent'},
+            name="clientevents",
+            options={"verbose_name": "ClientEvent"},
         ),
     ]

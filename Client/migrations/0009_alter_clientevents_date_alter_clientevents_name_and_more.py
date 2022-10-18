@@ -6,38 +6,38 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Client', '0008_time'),
+        ("Client", "0008_time"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='clientevents',
-            name='date',
+            model_name="clientevents",
+            name="date",
             field=models.DateField(blank=True, null=True),
         ),
         migrations.AlterField(
-            model_name='clientevents',
-            name='name',
+            model_name="clientevents",
+            name="name",
             field=models.CharField(blank=True, max_length=50, null=True),
         ),
         migrations.AlterField(
-            model_name='clientphone',
-            name='phone',
+            model_name="clientphone",
+            name="phone",
             field=models.CharField(blank=True, max_length=12, null=True),
         ),
         migrations.AlterField(
-            model_name='tag',
-            name='name',
+            model_name="tag",
+            name="name",
             field=models.CharField(blank=True, max_length=50, null=True),
         ),
         migrations.AlterField(
-            model_name='time',
-            name='name',
+            model_name="time",
+            name="name",
             field=models.CharField(blank=True, max_length=50, null=True),
         ),
         migrations.AlterField(
-            model_name='time',
-            name='time',
+            model_name="time",
+            name="time",
             field=models.TimeField(blank=True, null=True),
         ),
     ]

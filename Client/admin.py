@@ -1,23 +1,16 @@
 from django.contrib import admin
 
-from Client.models import ClientPhone, ClientEvents, Tag, Time
-
+from Client.models import ClientEvents, ClientPhone, Tag, Time
 
 # Register your models here.
 
+
 class ClientPhoneAdmin(admin.ModelAdmin):
-    list_display = [
-        "user",
-        "phone"
-    ]
+    list_display = ["user", "phone"]
 
 
 class ClientEventsAdmin(admin.ModelAdmin):
-    list_display = [
-        "user",
-        "name",
-        "date"
-    ]
+    list_display = ["user", "name", "date"]
 
 
 admin.site.register(Tag)

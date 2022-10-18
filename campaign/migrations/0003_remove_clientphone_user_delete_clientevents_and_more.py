@@ -6,18 +6,18 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('campaign', '0002_clientphone_clientevents'),
+        ("campaign", "0002_clientphone_clientevents"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='clientphone',
-            name='user',
+            model_name="clientphone",
+            name="user",
         ),
         migrations.DeleteModel(
-            name='ClientEvents',
+            name="ClientEvents",
         ),
         migrations.DeleteModel(
-            name='ClientPhone',
+            name="ClientPhone",
         ),
     ]
